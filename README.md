@@ -12,6 +12,7 @@ In this workshop, we provide an overview of HPC with Julia and cover three types
 - Part I: [Multi-threading](https://amontoison.github.io/Workshop-GERAD/multithreading.html)
 - Part II: [Multi-processing and distributed computing](https://amontoison.github.io/Workshop-GERAD/distributed_computing.html)
 - Part III: [GPU programming](https://amontoison.github.io/Workshop-GERAD/gpu_programming.html)
+- Part IV: [GPU Kernels with KernelAbstractions.jl](https://amontoison.github.io/Workshop-GERAD/gpu_kernels.html)
 
 ![Julia](./Graphics/julia_concept_map.png)
 
@@ -20,4 +21,4 @@ In this workshop, we provide an overview of HPC with Julia and cover three types
 - GPU Workshop material: [JuliaCon 2021](https://github.com/maleadt/juliacon21-gpu_workshop)
 - Advanced GPU Computing training: [cscs2023](https://github.com/maleadt/cscs2023)
 - An introduction to Julia for HPC: [JuliaUCL24](https://github.com/carstenbauer/JuliaUCL24)
-- Talks of Valentin Churavy: [website](https://vchuravy.dev/talks/)
+- Talks of Valentin Churavy: [website](https://vchuravy.dev/talks/) and [rse-course](https://vchuravy.dev/rse-course/)
