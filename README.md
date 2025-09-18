@@ -7,7 +7,8 @@ In this workshop, we provide an overview of HPC with Julia and cover three types
 - GPU programming: how to port a computational procedure to a graphical processing unit (GPU) via either high-level or low-level programming.
 
 **Notebooks**:
-- Introduction: [Parallel computing](https://amontoison.github.io/Workshop-GERAD/parallel_computing.html)
+- Introduction: [Julia](https://amontoison.github.io/Workshop-GERAD/introduction_julia.html)
+- Background: [Parallel computing](https://amontoison.github.io/Workshop-GERAD/parallel_computing.html)
 - Part I: [Multi-threading](https://amontoison.github.io/Workshop-GERAD/multithreading.html)
 - Part II: [Multi-processing and distributed computing](https://amontoison.github.io/Workshop-GERAD/distributed_computing.html)
 - Part III: [GPU programming](https://amontoison.github.io/Workshop-GERAD/gpu_programming.html)
@@ -19,3 +20,4 @@ In this workshop, we provide an overview of HPC with Julia and cover three types
 - GPU Workshop material: [JuliaCon 2021](https://github.com/maleadt/juliacon21-gpu_workshop)
 - Advanced GPU Computing training: [cscs2023](https://github.com/maleadt/cscs2023)
 - An introduction to Julia for HPC: [JuliaUCL24](https://github.com/carstenbauer/JuliaUCL24)
+- Talks of Valentin Churavy: [website](https://vchuravy.dev/talks/)

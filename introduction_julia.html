@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>parallel_computing</title><script src="file:///usr/share/javascript/requirejs/require.min.js"></script>
+<title>introduction_julia</title><script src="file:///usr/share/javascript/requirejs/require.min.js"></script>
 
 
 
@@ -14016,7 +14016,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Parallel-computing-and-GPU-programming-with-Julia">Parallel computing and GPU programming with Julia<a class="anchor-link" href="#Parallel-computing-and-GPU-programming-with-Julia">&#182;</a></h1><h2 id="%C2%A0Background">&#160;Background<a class="anchor-link" href="#%C2%A0Background">&#182;</a></h2><p>Alexis Montoison</p>
+<h1 id="A-brief-introduction-to-Julia">A brief introduction to Julia<a class="anchor-link" href="#A-brief-introduction-to-Julia">&#182;</a></h1><p>Alexis Montoison, Valentin Churavy, Mosè Giordano</p>
 
 </div>
 </div>
@@ -14024,7 +14024,11 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src='./Graphics/julia.png' width='200'></p>
+<h2 id="What's-Julia?-%F0%9F%9F%A2-%F0%9F%9F%A3-%F0%9F%94%B4">What's Julia? &#128994; &#128995; &#128308;<a class="anchor-link" href="#What's-Julia?-%F0%9F%9F%A2-%F0%9F%9F%A3-%F0%9F%94%B4">&#182;</a></h2><p>Julia is a modern, dynamic, general-purpose, compiled programming language.
+It's interactive ("like Python"), can be used in a REPL or notebooks, like Jupyter (it's the "Ju").
+Julia has a runtime which includes a just-in-time (JIT) compiler and a garbage collector (GC), for automatic memory management.</p>
+<p>Julia is mainly used for technical computing, and addresses a gap in the programming language landscape for numerical computing.</p>
+<p>Main paradigm of Julia is multiple dispatch, what functions do depend on type and number of <em>all</em> arguments.</p>
 
 </div>
 </div>
@@ -14032,15 +14036,28 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>There are many types of parallelism:</p>
+<p>From "<a href="https://scientificcoder.com/my-target-audience">My Target Audience</a>" by Matthijs Cox:</p>
+<p><img src="./Graphics/why_julia1.png" width=600px>
+ <img src="./Graphics/why_julia2.png" width=600px></p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="What-is-the-2-language-problem?">What is the 2 language problem?<a class="anchor-link" href="#What-is-the-2-language-problem?">&#182;</a></h2><p>You start out prototyping in one language (high-level, dynamic), but performance forces you to switch to a different one (low-level, static).</p>
 <ul>
-<li><strong>Instruction level parallelism</strong> (e.g. SIMD)</li>
-<li><strong>Multi-threading</strong> (shared memory)</li>
-<li><strong>Multi-processing</strong> (shared system memory)</li>
-<li><strong>Distributed processing</strong> (typically no shared memory)</li>
+<li>For convinience use a scripting language (Python, R, Matlab, ...)</li>
+<li>but do all the hard stuff in a systems language (C, C++, Fortran)</li>
 </ul>
-<p>And then there are highly-parallel hardware accelerators like <strong>GPUs</strong>.</p>
-<p>Important: <strong>At the center of any efficient parallel code is a fast serial code!!!</strong></p>
+<p>Pragmatic for many applications, but has drawbacks</p>
+<ul>
+<li>aren't the hard parts exactly where you need an easier language</li>
+<li>creates a social barrier -- a wall between users and developers</li>
+<li>"sandwich problem" -- layering of system and user code is expensive</li>
+<li>prohibits full stack optimisations</li>
+</ul>
 
 </div>
 </div>
@@ -14048,52 +14065,107 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="When-go-parallel?">When go parallel?<a class="anchor-link" href="#When-go-parallel?">&#182;</a></h3><ul>
-<li>If parts of your (optimized!) serial code aren't fast enough.<ul>
-<li>note that parallelization typically increases the code complexity.</li>
+<h2 id="Why-Julia?-%F0%9F%98%8D">Why Julia? &#128525;<a class="anchor-link" href="#Why-Julia?-%F0%9F%98%8D">&#182;</a></h2><ul>
+<li>Easy to read and write</li>
+<li>Fast like C, but simple like Python</li>
+<li>Works well with your own data and functions</li>
+<li>Lets you write code that looks like the math you mean</li>
+<li>No need to switch languages for performance...</li>
+<li>...but you can still call Fortran / C-like shared libraries if you want to</li>
+<li>MIT licensed: free and open source</li>
+<li>Excellent native GPU computing support</li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Getting-started-with-Julia">Getting started with Julia<a class="anchor-link" href="#Getting-started-with-Julia">&#182;</a></h2><p><a href="https://modernjuliaworkflows.org/">Modern Julia Workflows</a> is an excellent resource to get started with.</p>
+<h4 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h4><p>Use <code>juliaup</code></p>
+<div class="highlight"><pre><span></span>curl -fsSL https://install.julialang.org <span class="p">|</span> sh
+</pre></div>
+<h5 id="Resources">Resources<a class="anchor-link" href="#Resources">&#182;</a></h5><ul>
+<li>Modern Julia Workflows: <a href="https://modernjuliaworkflows.org">https://modernjuliaworkflows.org</a></li>
+<li>Discourse: <a href="https://discourse.julialang.org">https://discourse.julialang.org</a></li>
+<li>Documentation: <a href="https://docs.julialang.org">https://docs.julialang.org</a></li>
+<li>Community Calendar: <a href="https://julialang.org/community/#events">https://julialang.org/community/#events</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Package-manager">Package manager<a class="anchor-link" href="#Package-manager">&#182;</a></h2><p>One package manager, provided together with the language.</p>
+<ul>
+<li>Native notion of "environment"</li>
+<li><code>Project.toml</code>: Describes the dependencies and compatibilities</li>
+<li><p><code>Manifest.toml</code>: Record of precise versions of all direct &amp; indirect dependencies</p>
+<p><img src="./Graphics/pkg_python.png" width=500px></p>
 </li>
-<li>If your system has multiple execution units (CPU cores, GPU streaming multiprocessors, ...).<ul>
-<li>particularly important on large supercomputers but also already on modern desktop computers and laptops.</li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Binaries-included">Binaries included<a class="anchor-link" href="#Binaries-included">&#182;</a></h3><p>Major usability pain points of modern languages is the integration of dependencies from Fortran/C/C++, reliably across multiple operating systems.</p>
+<p>Julia provides JLL packages that wrap binaries, and automatically install the <strong>right</strong> one for your current platforms.</p>
+<ul>
+<li>Binarybuilder: (<a href="https://binarybuilder.org/">https://binarybuilder.org/</a>) --&gt; Sandboxed cross-compiler</li>
+<li>Yggdrasil: (<a href="https://github.com/JuliaPackaging/Yggdrasil/">https://github.com/JuliaPackaging/Yggdrasil/</a>) --&gt; Collection of build recipes</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Interfacing-with-C-and-Fortran-libraries">Interfacing with C and Fortran libraries<a class="anchor-link" href="#Interfacing-with-C-and-Fortran-libraries">&#182;</a></h2><ul>
+<li><p>Julia has <strong>direct support for foreign function calls</strong></p>
 </li>
+<li><p><a href="https://docs.julialang.org/en/v1/base/c/#Base.@ccall"><code>@ccall</code></a> → call C/Fortran directly</p>
+</li>
+<li><a href="https://docs.julialang.org/en/v1/base/c/#Base.@cfunction"><code>@cfunction</code></a> → expose Julia functions as C callbacks</li>
+<li>Automatic wrapper generation with <a href="https://github.com/JuliaInterop/Clang.jl">Clang.jl</a></li>
+<li>⚠️ Careful with garbage collection when passing pointers!</li>
 </ul>
 
 </div>
 </div>
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src='./Graphics/frontier.png' width='600'></p>
-
-</div>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src='./Graphics/aurora.png' width='600'></p>
-
-</div>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="How-many-CPU-threads-/-cores-do-I-have?">How many CPU threads / cores do I have?<a class="anchor-link" href="#How-many-CPU-threads-/-cores-do-I-have?">&#182;</a></h3>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">Hwloc</span>
-<span class="n">Hwloc</span><span class="o">.</span><span class="n">num_physical_cores</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
+<span class="kn">import</span> <span class="nn">LinearAlgebra.BLAS.libblas</span>
+
+<span class="n">function</span> <span class="n">dgemm</span><span class="p">(</span><span class="n">transa</span><span class="p">,</span> <span class="n">transb</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">lda</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">ldb</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">ldc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nd">@ccall</span> <span class="n">libblas</span><span class="o">.</span><span class="n">dgemm_64_</span><span class="p">(</span><span class="n">transa</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">UInt8</span><span class="p">},</span> <span class="n">transb</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">UInt8</span><span class="p">},</span>
+                                    <span class="n">m</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">n</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">k</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span>
+                                    <span class="n">alpha</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">A</span><span class="p">::</span><span class="n">Ptr</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span>
+                                    <span class="n">lda</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">B</span><span class="p">::</span><span class="n">Ptr</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">ldb</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span>
+                                    <span class="n">beta</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">C</span><span class="p">::</span><span class="n">Ptr</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">ldc</span><span class="p">::</span><span class="n">Ref</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span>
+                                    <span class="mi">1</span><span class="p">::</span><span class="n">Clong</span><span class="p">,</span> <span class="mi">1</span><span class="p">::</span><span class="n">Clong</span><span class="p">)::</span><span class="n">Cvoid</span>
+<span class="n">end</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Float64</span><span class="p">,</span> <span class="mi">3</span> <span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Float64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Float64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># C = 1.0*A*B + 0.0*C</span>
+<span class="n">dgemm</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">C</span>
 </pre></div>
 
      </div>
@@ -14101,48 +14173,25 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>2</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Note that there may be more than one CPU thread per physical CPU core (e.g. hyperthreading).</p>
+<p>👉 <code>*</code> and <code>mul!</code> transparently use the optimized BLAS library.</p>
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="n">Sys</span><span class="o">.</span><span class="n">CPU_THREADS</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Float64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mul</span><span class="o">!(</span>D, A, B<span class="o">)</span>   # calls BLAS dgemm under the hood
+<span class="n">D</span> <span class="o">==</span> <span class="n">A</span><span class="o">*</span><span class="n">B</span>        <span class="c1"># true</span>
 </pre></div>
 
      </div>
@@ -14150,43 +14199,19 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>4</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Amdahl's-law">Amdahl's law<a class="anchor-link" href="#Amdahl's-law">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Naive strong scaling expectation: I have 4 cores, give me my 4x speedup!</p>
+<h2 id="Multiple-dispatch-in-action-%F0%9F%9A%80">Multiple dispatch in action &#128640;<a class="anchor-link" href="#Multiple-dispatch-in-action-%F0%9F%9A%80">&#182;</a></h2><p>In Julia, the function that runs depends on the <strong>types of all arguments</strong>:</p>
+<div class="highlight"><pre><span></span><span class="c"># Same function name, different methods</span>
+<span class="n">area</span><span class="p">(</span><span class="n">radius</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span> <span class="o">=</span> <span class="nb">π</span> <span class="o">*</span> <span class="n">radius</span><span class="o">^</span><span class="mi">2</span>                 <span class="c"># Circle</span>
+<span class="n">area</span><span class="p">(</span><span class="n">width</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">height</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span> <span class="o">=</span> <span class="n">width</span><span class="o">*</span><span class="n">height</span> <span class="c"># Rectangle</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">area</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>        <span class="c"># uses the circle method</span>
+<span class="n">println</span><span class="p">(</span><span class="n">area</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">))</span>   <span class="c"># uses the rectangle method</span>
+</pre></div>
+<p>👉 Julia picks the right version automatically.</p>
 
 </div>
 </div>
@@ -14194,28 +14219,72 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>If $p$ is the fraction of a code that can be parallelized, then the maximal theoretical speedup by parallelization on $n$ cores is given by $$ F(n) = \frac{1}{1 - p + p / n} $$</p>
-</blockquote>
+<div class="highlight"><pre><span></span><span class="n">mypower</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>    <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span>        <span class="c"># square integers</span>
+<span class="n">mypower</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c"># square-root floats</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>     <span class="c"># → 16 (square)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="mf">9.0</span><span class="p">))</span>   <span class="c"># → 3.0 (square root)</span>
+</pre></div>
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div>
 <div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
-<span class="n">F</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span> <span class="o">+</span> <span class="n">p</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Works-with-user-defined-types">Works with user-defined types<a class="anchor-link" href="#Works-with-user-defined-types">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">abstract type</span> <span class="kt">NumberLike</span> <span class="k">end</span>
 
-<span class="n">pl</span> <span class="o">=</span> <span class="n">plot</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">)</span>
-    <span class="n">plot!</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">F</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">n</span><span class="p">),</span> <span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s">&quot;p=</span><span class="si">$p</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-        <span class="n">legend</span><span class="o">=</span><span class="ss">:topleft</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;number of cores&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;parallel speedup&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="ss">:box</span><span class="p">)</span>
+<span class="k">struct</span> <span class="kt">Dual</span><span class="p">{</span><span class="kt">T</span><span class="o">&lt;:</span><span class="kt">Real</span><span class="p">}</span> <span class="o">&lt;:</span> <span class="kt">NumberLike</span>
+    <span class="n">primal</span><span class="o">::</span><span class="kt">T</span>
+    <span class="n">tangent</span><span class="o">::</span><span class="kt">T</span>
 <span class="k">end</span>
-<span class="n">pl</span>
+
+<span class="c"># Define + for Dual numbers</span>
+<span class="n">Base</span><span class="o">.:+</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Dual</span><span class="p">,</span> <span class="n">y</span><span class="o">::</span><span class="kt">Dual</span><span class="p">)</span> <span class="o">=</span> <span class="n">Dual</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">primal</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">primal</span><span class="p">,</span>
+                                 <span class="n">x</span><span class="o">.</span><span class="n">tangent</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">tangent</span><span class="p">)</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">Dual</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">Dual</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">))</span>  
+<span class="c"># Dual(4.0, 6.0)</span>
+</pre></div>
+<p>👉 Here we added a new “kind of number” (<code>Dual</code>), and Julia’s multiple dispatch makes it work seamlessly with operators like <code>+</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Compilation-of-a-dynamic-language.">Compilation of a dynamic language.<a class="anchor-link" href="#Compilation-of-a-dynamic-language.">&#182;</a></h2><p>Julia's compiler uses LLVM, a widely used open-source tool that helps turn code into fast machine instructions.</p>
+<p><img src="./Graphics/llvm.png" width=500px></p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="How-Julia-turns-code-into-machine-instructions">How Julia turns code into machine instructions<a class="anchor-link" href="#How-Julia-turns-code-into-machine-instructions">&#182;</a></h3><ol>
+<li><strong>Parsing</strong> → read your code and turn it into a syntax tree</li>
+<li><strong>Lowering</strong> → simplify the syntax tree into a more uniform form</li>
+<li><strong>Type inference</strong> → guess the types of variables and expressions</li>
+<li><strong>High-level optimizations</strong> → improve the code while it’s still in Julia’s own form</li>
+<li><strong>Code generation</strong> → translate Julia code into LLVM IR (an intermediate language)</li>
+<li><strong>LLVM optimizations</strong> → LLVM applies many generic optimizations</li>
+<li><strong>LLVM backend</strong> → LLVM translates IR into machine code for your CPU/GPU</li>
+<li><strong>Native code</strong> → final executable instructions that run on your computer</li>
+</ol>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Meta</span><span class="o">.</span><span class="nd">@dump</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span>
 </pre></div>
 
      </div>
@@ -14223,162 +14292,86 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="400" viewBox="0 0 2400 1600">
-<defs>
-  <clipPath id="clip150">
-    <rect x="0" y="0" width="2400" height="1600"/>
-  </clipPath>
-</defs>
-<path clip-path="url(#clip150)" d="M0 1600 L2400 1600 L2400 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"/>
-<defs>
-  <clipPath id="clip151">
-    <rect x="480" y="0" width="1681" height="1600"/>
-  </clipPath>
-</defs>
-<path clip-path="url(#clip150)" d="M175.445 1423.18 L2352.76 1423.18 L2352.76 47.2441 L175.445 47.2441  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"/>
-<defs>
-  <clipPath id="clip152">
-    <rect x="175" y="47" width="2178" height="1377"/>
-  </clipPath>
-</defs>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="530.505,1423.18 530.505,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1117.38,1423.18 1117.38,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1704.26,1423.18 1704.26,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2291.13,1423.18 2291.13,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="530.505,1423.18 530.505,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1117.38,1423.18 1117.38,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1704.26,1423.18 1704.26,47.2441 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2291.13,1423.18 2291.13,47.2441 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,1423.18 2352.76,1423.18 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,47.2441 2352.76,47.2441 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="530.505,1423.18 530.505,1404.28 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1117.38,1423.18 1117.38,1404.28 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1704.26,1423.18 1704.26,1404.28 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2291.13,1423.18 2291.13,1404.28 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="530.505,47.2441 530.505,66.1417 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1117.38,47.2441 1117.38,66.1417 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1704.26,47.2441 1704.26,66.1417 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2291.13,47.2441 2291.13,66.1417 "/>
-<path clip-path="url(#clip150)" d="M525.158 1481.64 L541.477 1481.64 L541.477 1485.58 L519.533 1485.58 L519.533 1481.64 Q522.195 1478.89 526.778 1474.26 Q531.385 1469.61 532.565 1468.27 Q534.811 1465.74 535.69 1464.01 Q536.593 1462.25 536.593 1460.56 Q536.593 1457.8 534.649 1456.07 Q532.728 1454.33 529.626 1454.33 Q527.427 1454.33 524.973 1455.09 Q522.542 1455.86 519.765 1457.41 L519.765 1452.69 Q522.589 1451.55 525.042 1450.97 Q527.496 1450.39 529.533 1450.39 Q534.903 1450.39 538.098 1453.08 Q541.292 1455.77 541.292 1460.26 Q541.292 1462.39 540.482 1464.31 Q539.695 1466.2 537.589 1468.8 Q537.01 1469.47 533.908 1472.69 Q530.806 1475.88 525.158 1481.64 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1120.39 1455.09 L1108.59 1473.54 L1120.39 1473.54 L1120.39 1455.09 M1119.16 1451.02 L1125.04 1451.02 L1125.04 1473.54 L1129.97 1473.54 L1129.97 1477.43 L1125.04 1477.43 L1125.04 1485.58 L1120.39 1485.58 L1120.39 1477.43 L1104.79 1477.43 L1104.79 1472.92 L1119.16 1451.02 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1704.66 1466.44 Q1701.51 1466.44 1699.66 1468.59 Q1697.83 1470.74 1697.83 1474.49 Q1697.83 1478.22 1699.66 1480.39 Q1701.51 1482.55 1704.66 1482.55 Q1707.81 1482.55 1709.64 1480.39 Q1711.49 1478.22 1711.49 1474.49 Q1711.49 1470.74 1709.64 1468.59 Q1707.81 1466.44 1704.66 1466.44 M1713.95 1451.78 L1713.95 1456.04 Q1712.19 1455.21 1710.38 1454.77 Q1708.6 1454.33 1706.84 1454.33 Q1702.21 1454.33 1699.76 1457.45 Q1697.32 1460.58 1696.98 1466.9 Q1698.34 1464.89 1700.4 1463.82 Q1702.46 1462.73 1704.94 1462.73 Q1710.15 1462.73 1713.16 1465.9 Q1716.19 1469.05 1716.19 1474.49 Q1716.19 1479.82 1713.04 1483.03 Q1709.89 1486.25 1704.66 1486.25 Q1698.67 1486.25 1695.5 1481.67 Q1692.32 1477.06 1692.32 1468.33 Q1692.32 1460.14 1696.21 1455.28 Q1700.1 1450.39 1706.65 1450.39 Q1708.41 1450.39 1710.2 1450.74 Q1712 1451.09 1713.95 1451.78 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M2291.13 1469.17 Q2287.8 1469.17 2285.88 1470.95 Q2283.98 1472.73 2283.98 1475.86 Q2283.98 1478.98 2285.88 1480.77 Q2287.8 1482.55 2291.13 1482.55 Q2294.47 1482.55 2296.39 1480.77 Q2298.31 1478.96 2298.31 1475.86 Q2298.31 1472.73 2296.39 1470.95 Q2294.49 1469.17 2291.13 1469.17 M2286.46 1467.18 Q2283.45 1466.44 2281.76 1464.38 Q2280.09 1462.32 2280.09 1459.35 Q2280.09 1455.21 2283.03 1452.8 Q2286 1450.39 2291.13 1450.39 Q2296.3 1450.39 2299.24 1452.8 Q2302.18 1455.21 2302.18 1459.35 Q2302.18 1462.32 2300.49 1464.38 Q2298.82 1466.44 2295.83 1467.18 Q2299.21 1467.96 2301.09 1470.26 Q2302.99 1472.55 2302.99 1475.86 Q2302.99 1480.88 2299.91 1483.57 Q2296.85 1486.25 2291.13 1486.25 Q2285.42 1486.25 2282.34 1483.57 Q2279.28 1480.88 2279.28 1475.86 Q2279.28 1472.55 2281.18 1470.26 Q2283.08 1467.96 2286.46 1467.18 M2284.75 1459.79 Q2284.75 1462.48 2286.41 1463.98 Q2288.1 1465.49 2291.13 1465.49 Q2294.14 1465.49 2295.83 1463.98 Q2297.55 1462.48 2297.55 1459.79 Q2297.55 1457.11 2295.83 1455.6 Q2294.14 1454.1 2291.13 1454.1 Q2288.1 1454.1 2286.41 1455.6 Q2284.75 1457.11 2284.75 1459.79 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1031.59 1546.53 L1031.59 1568.04 L1025.74 1568.04 L1025.74 1546.72 Q1025.74 1541.66 1023.76 1539.14 Q1021.79 1536.63 1017.84 1536.63 Q1013.1 1536.63 1010.36 1539.65 Q1007.63 1542.68 1007.63 1547.9 L1007.63 1568.04 L1001.74 1568.04 L1001.74 1532.4 L1007.63 1532.4 L1007.63 1537.93 Q1009.73 1534.72 1012.56 1533.13 Q1015.42 1531.54 1019.15 1531.54 Q1025.29 1531.54 1028.44 1535.36 Q1031.59 1539.14 1031.59 1546.53 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1042.67 1553.98 L1042.67 1532.4 L1048.53 1532.4 L1048.53 1553.75 Q1048.53 1558.81 1050.5 1561.36 Q1052.47 1563.87 1056.42 1563.87 Q1061.16 1563.87 1063.9 1560.85 Q1066.67 1557.83 1066.67 1552.61 L1066.67 1532.4 L1072.52 1532.4 L1072.52 1568.04 L1066.67 1568.04 L1066.67 1562.57 Q1064.54 1565.82 1061.7 1567.41 Q1058.9 1568.97 1055.18 1568.97 Q1049.04 1568.97 1045.85 1565.15 Q1042.67 1561.33 1042.67 1553.98 M1057.41 1531.54 L1057.41 1531.54 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1112.34 1539.24 Q1114.54 1535.29 1117.59 1533.41 Q1120.65 1531.54 1124.79 1531.54 Q1130.36 1531.54 1133.38 1535.45 Q1136.4 1539.33 1136.4 1546.53 L1136.4 1568.04 L1130.52 1568.04 L1130.52 1546.72 Q1130.52 1541.59 1128.7 1539.11 Q1126.89 1536.63 1123.16 1536.63 Q1118.61 1536.63 1115.97 1539.65 Q1113.33 1542.68 1113.33 1547.9 L1113.33 1568.04 L1107.44 1568.04 L1107.44 1546.72 Q1107.44 1541.56 1105.63 1539.11 Q1103.81 1536.63 1100.02 1536.63 Q1095.54 1536.63 1092.89 1539.68 Q1090.25 1542.71 1090.25 1547.9 L1090.25 1568.04 L1084.36 1568.04 L1084.36 1532.4 L1090.25 1532.4 L1090.25 1537.93 Q1092.26 1534.66 1095.06 1533.1 Q1097.86 1531.54 1101.71 1531.54 Q1105.59 1531.54 1108.3 1533.51 Q1111.04 1535.48 1112.34 1539.24 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1173.68 1550.25 Q1173.68 1543.79 1171 1540.13 Q1168.36 1536.44 1163.71 1536.44 Q1159.07 1536.44 1156.39 1540.13 Q1153.75 1543.79 1153.75 1550.25 Q1153.75 1556.71 1156.39 1560.4 Q1159.07 1564.07 1163.71 1564.07 Q1168.36 1564.07 1171 1560.4 Q1173.68 1556.71 1173.68 1550.25 M1153.75 1537.81 Q1155.6 1534.62 1158.4 1533.1 Q1161.23 1531.54 1165.15 1531.54 Q1171.64 1531.54 1175.68 1536.69 Q1179.75 1541.85 1179.75 1550.25 Q1179.75 1558.65 1175.68 1563.81 Q1171.64 1568.97 1165.15 1568.97 Q1161.23 1568.97 1158.4 1567.44 Q1155.6 1565.88 1153.75 1562.7 L1153.75 1568.04 L1147.86 1568.04 L1147.86 1518.52 L1153.75 1518.52 L1153.75 1537.81 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1219.95 1548.76 L1219.95 1551.62 L1193.03 1551.62 Q1193.41 1557.67 1196.66 1560.85 Q1199.93 1564 1205.76 1564 Q1209.13 1564 1212.28 1563.17 Q1215.47 1562.35 1218.59 1560.69 L1218.59 1566.23 Q1215.43 1567.57 1212.12 1568.27 Q1208.81 1568.97 1205.41 1568.97 Q1196.88 1568.97 1191.88 1564 Q1186.92 1559.04 1186.92 1550.57 Q1186.92 1541.82 1191.63 1536.69 Q1196.37 1531.54 1204.39 1531.54 Q1211.58 1531.54 1215.75 1536.18 Q1219.95 1540.8 1219.95 1548.76 M1214.1 1547.04 Q1214.03 1542.23 1211.39 1539.37 Q1208.78 1536.5 1204.45 1536.5 Q1199.55 1536.5 1196.59 1539.27 Q1193.66 1542.04 1193.22 1547.07 L1214.1 1547.04 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1250.22 1537.87 Q1249.24 1537.3 1248.06 1537.04 Q1246.91 1536.76 1245.51 1536.76 Q1240.55 1536.76 1237.87 1540 Q1235.23 1543.22 1235.23 1549.27 L1235.23 1568.04 L1229.34 1568.04 L1229.34 1532.4 L1235.23 1532.4 L1235.23 1537.93 Q1237.08 1534.69 1240.04 1533.13 Q1243 1531.54 1247.23 1531.54 Q1247.84 1531.54 1248.57 1531.63 Q1249.3 1531.7 1250.19 1531.85 L1250.22 1537.87 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1290.9 1536.5 Q1286.19 1536.5 1283.45 1540.19 Q1280.72 1543.85 1280.72 1550.25 Q1280.72 1556.65 1283.42 1560.34 Q1286.16 1564 1290.9 1564 Q1295.58 1564 1298.32 1560.31 Q1301.05 1556.62 1301.05 1550.25 Q1301.05 1543.92 1298.32 1540.23 Q1295.58 1536.5 1290.9 1536.5 M1290.9 1531.54 Q1298.54 1531.54 1302.9 1536.5 Q1307.26 1541.47 1307.26 1550.25 Q1307.26 1559 1302.9 1564 Q1298.54 1568.97 1290.9 1568.97 Q1283.23 1568.97 1278.87 1564 Q1274.54 1559 1274.54 1550.25 Q1274.54 1541.47 1278.87 1536.5 Q1283.23 1531.54 1290.9 1531.54 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1335.01 1518.52 L1335.01 1523.39 L1329.41 1523.39 Q1326.26 1523.39 1325.02 1524.66 Q1323.81 1525.93 1323.81 1529.24 L1323.81 1532.4 L1333.45 1532.4 L1333.45 1536.95 L1323.81 1536.95 L1323.81 1568.04 L1317.92 1568.04 L1317.92 1536.95 L1312.32 1536.95 L1312.32 1532.4 L1317.92 1532.4 L1317.92 1529.91 Q1317.92 1523.96 1320.69 1521.26 Q1323.46 1518.52 1329.48 1518.52 L1335.01 1518.52 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1386.29 1533.76 L1386.29 1539.24 Q1383.81 1537.87 1381.29 1537.2 Q1378.81 1536.5 1376.26 1536.5 Q1370.57 1536.5 1367.42 1540.13 Q1364.26 1543.73 1364.26 1550.25 Q1364.26 1556.78 1367.42 1560.4 Q1370.57 1564 1376.26 1564 Q1378.81 1564 1381.29 1563.33 Q1383.81 1562.63 1386.29 1561.26 L1386.29 1566.68 Q1383.84 1567.82 1381.2 1568.39 Q1378.59 1568.97 1375.63 1568.97 Q1367.58 1568.97 1362.83 1563.91 Q1358.09 1558.85 1358.09 1550.25 Q1358.09 1541.53 1362.86 1536.53 Q1367.67 1531.54 1376.01 1531.54 Q1378.72 1531.54 1381.29 1532.11 Q1383.87 1532.65 1386.29 1533.76 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1410.29 1536.5 Q1405.58 1536.5 1402.84 1540.19 Q1400.1 1543.85 1400.1 1550.25 Q1400.1 1556.65 1402.81 1560.34 Q1405.55 1564 1410.29 1564 Q1414.97 1564 1417.71 1560.31 Q1420.44 1556.62 1420.44 1550.25 Q1420.44 1543.92 1417.71 1540.23 Q1414.97 1536.5 1410.29 1536.5 M1410.29 1531.54 Q1417.93 1531.54 1422.29 1536.5 Q1426.65 1541.47 1426.65 1550.25 Q1426.65 1559 1422.29 1564 Q1417.93 1568.97 1410.29 1568.97 Q1402.62 1568.97 1398.26 1564 Q1393.93 1559 1393.93 1550.25 Q1393.93 1541.47 1398.26 1536.5 Q1402.62 1531.54 1410.29 1531.54 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1457.01 1537.87 Q1456.03 1537.3 1454.85 1537.04 Q1453.7 1536.76 1452.3 1536.76 Q1447.34 1536.76 1444.66 1540 Q1442.02 1543.22 1442.02 1549.27 L1442.02 1568.04 L1436.13 1568.04 L1436.13 1532.4 L1442.02 1532.4 L1442.02 1537.93 Q1443.87 1534.69 1446.83 1533.13 Q1449.79 1531.54 1454.02 1531.54 Q1454.63 1531.54 1455.36 1531.63 Q1456.09 1531.7 1456.98 1531.85 L1457.01 1537.87 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1492.22 1548.76 L1492.22 1551.62 L1465.29 1551.62 Q1465.67 1557.67 1468.92 1560.85 Q1472.2 1564 1478.02 1564 Q1481.39 1564 1484.54 1563.17 Q1487.73 1562.35 1490.85 1560.69 L1490.85 1566.23 Q1487.7 1567.57 1484.39 1568.27 Q1481.08 1568.97 1477.67 1568.97 Q1469.14 1568.97 1464.14 1564 Q1459.18 1559.04 1459.18 1550.57 Q1459.18 1541.82 1463.89 1536.69 Q1468.63 1531.54 1476.65 1531.54 Q1483.84 1531.54 1488.01 1536.18 Q1492.22 1540.8 1492.22 1548.76 M1486.36 1547.04 Q1486.3 1542.23 1483.65 1539.37 Q1481.04 1536.5 1476.72 1536.5 Q1471.81 1536.5 1468.85 1539.27 Q1465.93 1542.04 1465.48 1547.07 L1486.36 1547.04 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M1524.55 1533.45 L1524.55 1538.98 Q1522.07 1537.71 1519.4 1537.07 Q1516.72 1536.44 1513.86 1536.44 Q1509.5 1536.44 1507.3 1537.77 Q1505.14 1539.11 1505.14 1541.79 Q1505.14 1543.82 1506.7 1545 Q1508.26 1546.15 1512.97 1547.2 L1514.97 1547.64 Q1521.21 1548.98 1523.82 1551.43 Q1526.46 1553.85 1526.46 1558.21 Q1526.46 1563.17 1522.52 1566.07 Q1518.6 1568.97 1511.73 1568.97 Q1508.86 1568.97 1505.74 1568.39 Q1502.66 1567.85 1499.22 1566.74 L1499.22 1560.69 Q1502.46 1562.38 1505.62 1563.24 Q1508.77 1564.07 1511.85 1564.07 Q1515.99 1564.07 1518.22 1562.66 Q1520.45 1561.23 1520.45 1558.65 Q1520.45 1556.27 1518.82 1554.99 Q1517.23 1553.72 1511.79 1552.54 L1509.75 1552.07 Q1504.31 1550.92 1501.89 1548.56 Q1499.47 1546.18 1499.47 1542.04 Q1499.47 1537.01 1503.04 1534.27 Q1506.6 1531.54 1513.16 1531.54 Q1516.41 1531.54 1519.27 1532.01 Q1522.13 1532.49 1524.55 1533.45 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,1384.24 2352.76,1384.24 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,1183.82 2352.76,1183.82 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,983.397 2352.76,983.397 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,782.976 2352.76,782.976 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,582.555 2352.76,582.555 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,382.134 2352.76,382.134 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,181.713 2352.76,181.713 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,1384.24 2352.76,1384.24 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,1183.82 2352.76,1183.82 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,983.397 2352.76,983.397 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,782.976 2352.76,782.976 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,582.555 2352.76,582.555 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,382.134 2352.76,382.134 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="175.445,181.713 2352.76,181.713 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,1423.18 175.445,47.2441 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,1423.18 2352.76,47.2441 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,1384.24 194.343,1384.24 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,1183.82 194.343,1183.82 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,983.397 194.343,983.397 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,782.976 194.343,782.976 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,582.555 194.343,582.555 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,382.134 194.343,382.134 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="175.445,181.713 194.343,181.713 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,1384.24 2333.86,1384.24 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,1183.82 2333.86,1183.82 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,983.397 2333.86,983.397 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,782.976 2333.86,782.976 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,582.555 2333.86,582.555 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,382.134 2333.86,382.134 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,181.713 2333.86,181.713 "/>
-<path clip-path="url(#clip150)" d="M119.538 1397.58 L127.177 1397.58 L127.177 1371.22 L118.867 1372.88 L118.867 1368.62 L127.13 1366.96 L131.806 1366.96 L131.806 1397.58 L139.445 1397.58 L139.445 1401.52 L119.538 1401.52 L119.538 1397.58 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M123.126 1197.16 L139.445 1197.16 L139.445 1201.1 L117.501 1201.1 L117.501 1197.16 Q120.163 1194.41 124.746 1189.78 Q129.353 1185.13 130.533 1183.78 Q132.779 1181.26 133.658 1179.52 Q134.561 1177.76 134.561 1176.07 Q134.561 1173.32 132.617 1171.58 Q130.695 1169.85 127.593 1169.85 Q125.394 1169.85 122.941 1170.61 Q120.51 1171.38 117.732 1172.93 L117.732 1168.2 Q120.556 1167.07 123.01 1166.49 Q125.464 1165.91 127.501 1165.91 Q132.871 1165.91 136.066 1168.6 Q139.26 1171.28 139.26 1175.77 Q139.26 1177.9 138.45 1179.82 Q137.663 1181.72 135.556 1184.32 Q134.978 1184.99 131.876 1188.2 Q128.774 1191.4 123.126 1197.16 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M132.316 982.042 Q135.672 982.76 137.547 985.029 Q139.445 987.297 139.445 990.63 Q139.445 995.746 135.927 998.547 Q132.408 1001.35 125.927 1001.35 Q123.751 1001.35 121.436 1000.91 Q119.144 1000.49 116.691 999.635 L116.691 995.121 Q118.635 996.255 120.95 996.834 Q123.265 997.413 125.788 997.413 Q130.186 997.413 132.478 995.677 Q134.792 993.941 134.792 990.63 Q134.792 987.575 132.64 985.862 Q130.51 984.126 126.691 984.126 L122.663 984.126 L122.663 980.283 L126.876 980.283 Q130.325 980.283 132.154 978.917 Q133.982 977.529 133.982 974.936 Q133.982 972.274 132.084 970.862 Q130.209 969.427 126.691 969.427 Q124.769 969.427 122.57 969.843 Q120.371 970.26 117.732 971.14 L117.732 966.973 Q120.394 966.232 122.709 965.862 Q125.047 965.492 127.107 965.492 Q132.431 965.492 135.533 967.922 Q138.635 970.33 138.635 974.45 Q138.635 977.32 136.992 979.311 Q135.348 981.279 132.316 982.042 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M129.862 769.77 L118.056 788.219 L129.862 788.219 L129.862 769.77 M128.635 765.696 L134.515 765.696 L134.515 788.219 L139.445 788.219 L139.445 792.108 L134.515 792.108 L134.515 800.256 L129.862 800.256 L129.862 792.108 L114.26 792.108 L114.26 787.594 L128.635 765.696 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M118.543 565.275 L136.899 565.275 L136.899 569.21 L122.825 569.21 L122.825 577.682 Q123.843 577.335 124.862 577.173 Q125.88 576.988 126.899 576.988 Q132.686 576.988 136.066 580.159 Q139.445 583.33 139.445 588.747 Q139.445 594.326 135.973 597.428 Q132.501 600.506 126.181 600.506 Q124.005 600.506 121.737 600.136 Q119.492 599.766 117.084 599.025 L117.084 594.326 Q119.168 595.46 121.39 596.016 Q123.612 596.571 126.089 596.571 Q130.093 596.571 132.431 594.465 Q134.769 592.358 134.769 588.747 Q134.769 585.136 132.431 583.03 Q130.093 580.923 126.089 580.923 Q124.214 580.923 122.339 581.34 Q120.487 581.756 118.543 582.636 L118.543 565.275 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M127.917 380.271 Q124.769 380.271 122.918 382.424 Q121.089 384.576 121.089 388.326 Q121.089 392.053 122.918 394.229 Q124.769 396.382 127.917 396.382 Q131.066 396.382 132.894 394.229 Q134.746 392.053 134.746 388.326 Q134.746 384.576 132.894 382.424 Q131.066 380.271 127.917 380.271 M137.2 365.618 L137.2 369.877 Q135.441 369.044 133.635 368.604 Q131.853 368.164 130.093 368.164 Q125.464 368.164 123.01 371.289 Q120.58 374.414 120.232 380.734 Q121.598 378.72 123.658 377.655 Q125.718 376.567 128.195 376.567 Q133.404 376.567 136.413 379.738 Q139.445 382.886 139.445 388.326 Q139.445 393.65 136.297 396.868 Q133.149 400.085 127.917 400.085 Q121.922 400.085 118.751 395.502 Q115.58 390.896 115.58 382.169 Q115.58 373.974 119.468 369.113 Q123.357 364.229 129.908 364.229 Q131.667 364.229 133.45 364.576 Q135.255 364.924 137.2 365.618 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M117.223 164.433 L139.445 164.433 L139.445 166.424 L126.899 198.993 L122.015 198.993 L133.82 168.369 L117.223 168.369 L117.223 164.433 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M58.657 995.999 L77.5631 995.999 L77.5631 1001.89 L28.3562 1001.89 L28.3562 995.999 L33.7671 995.999 Q30.5842 994.153 29.0564 991.352 Q27.4968 988.519 27.4968 984.604 Q27.4968 978.111 32.6531 974.069 Q37.8093 969.995 46.212 969.995 Q54.6147 969.995 59.771 974.069 Q64.9272 978.111 64.9272 984.604 Q64.9272 988.519 63.3994 991.352 Q61.8398 994.153 58.657 995.999 M46.212 976.074 Q39.7508 976.074 36.0905 978.748 Q32.3984 981.39 32.3984 986.037 Q32.3984 990.684 36.0905 993.357 Q39.7508 995.999 46.212 995.999 Q52.6732 995.999 56.3653 993.357 Q60.0256 990.684 60.0256 986.037 Q60.0256 981.39 56.3653 978.748 Q52.6732 976.074 46.212 976.074 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M46.0847 944.087 Q46.0847 951.184 47.7079 953.922 Q49.3312 956.659 53.2461 956.659 Q56.3653 956.659 58.2114 954.622 Q60.0256 952.553 60.0256 949.02 Q60.0256 944.15 56.5881 941.222 Q53.1188 938.262 47.3897 938.262 L46.0847 938.262 L46.0847 944.087 M43.6657 932.406 L64.0042 932.406 L64.0042 938.262 L58.5933 938.262 Q61.8398 940.267 63.3994 943.259 Q64.9272 946.251 64.9272 950.58 Q64.9272 956.054 61.8716 959.301 Q58.7843 962.515 53.6281 962.515 Q47.6125 962.515 44.5569 958.505 Q41.5014 954.463 41.5014 946.474 L41.5014 938.262 L40.9285 938.262 Q36.8862 938.262 34.6901 940.936 Q32.4621 943.577 32.4621 948.384 Q32.4621 951.439 33.1941 954.336 Q33.9262 957.232 35.3903 959.905 L29.9795 959.905 Q28.7381 956.691 28.1334 953.667 Q27.4968 950.643 27.4968 947.779 Q27.4968 940.044 31.5072 936.225 Q35.5176 932.406 43.6657 932.406 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M33.8307 899.686 Q33.2578 900.673 33.0032 901.85 Q32.7167 902.996 32.7167 904.397 Q32.7167 909.362 35.9632 912.035 Q39.1779 914.677 45.2253 914.677 L64.0042 914.677 L64.0042 920.565 L28.3562 920.565 L28.3562 914.677 L33.8944 914.677 Q30.6479 912.831 29.0883 909.871 Q27.4968 906.911 27.4968 902.678 Q27.4968 902.073 27.5923 901.341 Q27.656 900.609 27.8151 899.718 L33.8307 899.686 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M46.0847 877.342 Q46.0847 884.44 47.7079 887.177 Q49.3312 889.915 53.2461 889.915 Q56.3653 889.915 58.2114 887.878 Q60.0256 885.809 60.0256 882.276 Q60.0256 877.406 56.5881 874.478 Q53.1188 871.518 47.3897 871.518 L46.0847 871.518 L46.0847 877.342 M43.6657 865.661 L64.0042 865.661 L64.0042 871.518 L58.5933 871.518 Q61.8398 873.523 63.3994 876.515 Q64.9272 879.507 64.9272 883.835 Q64.9272 889.31 61.8716 892.556 Q58.7843 895.771 53.6281 895.771 Q47.6125 895.771 44.5569 891.761 Q41.5014 887.718 41.5014 879.729 L41.5014 871.518 L40.9285 871.518 Q36.8862 871.518 34.6901 874.191 Q32.4621 876.833 32.4621 881.639 Q32.4621 884.695 33.1941 887.591 Q33.9262 890.487 35.3903 893.161 L29.9795 893.161 Q28.7381 889.946 28.1334 886.923 Q27.4968 883.899 27.4968 881.034 Q27.4968 873.3 31.5072 869.481 Q35.5176 865.661 43.6657 865.661 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M14.479 853.598 L14.479 847.742 L64.0042 847.742 L64.0042 853.598 L14.479 853.598 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M14.479 835.488 L14.479 829.631 L64.0042 829.631 L64.0042 835.488 L14.479 835.488 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M44.7161 786.886 L47.5806 786.886 L47.5806 813.813 Q53.6281 813.431 56.8109 810.184 Q59.9619 806.906 59.9619 801.081 Q59.9619 797.707 59.1344 794.556 Q58.3069 791.373 56.6518 788.254 L62.1899 788.254 Q63.5267 791.405 64.227 794.715 Q64.9272 798.026 64.9272 801.431 Q64.9272 809.961 59.9619 814.958 Q54.9967 819.924 46.5303 819.924 Q37.7774 819.924 32.6531 815.213 Q27.4968 810.471 27.4968 802.45 Q27.4968 795.256 32.1438 791.087 Q36.7589 786.886 44.7161 786.886 M42.9973 792.742 Q38.1912 792.806 35.3266 795.447 Q32.4621 798.057 32.4621 802.386 Q32.4621 807.288 35.2312 810.248 Q38.0002 813.176 43.0292 813.622 L42.9973 792.742 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M14.479 777.273 L14.479 771.417 L64.0042 771.417 L64.0042 777.273 L14.479 777.273 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M29.4065 715.717 L34.9447 715.717 Q33.6716 718.2 33.035 720.873 Q32.3984 723.547 32.3984 726.411 Q32.3984 730.772 33.7352 732.968 Q35.072 735.132 37.7456 735.132 Q39.7826 735.132 40.9603 733.573 Q42.1061 732.013 43.1565 727.303 L43.6021 725.297 Q44.9389 719.059 47.3897 716.449 Q49.8086 713.807 54.1691 713.807 Q59.1344 713.807 62.0308 717.754 Q64.9272 721.669 64.9272 728.544 Q64.9272 731.408 64.3543 734.528 Q63.8132 737.615 62.6992 741.053 L56.6518 741.053 Q58.3387 737.806 59.198 734.655 Q60.0256 731.504 60.0256 728.417 Q60.0256 724.279 58.6251 722.051 Q57.1929 719.823 54.6147 719.823 Q52.2276 719.823 50.9545 721.446 Q49.6813 723.038 48.5037 728.48 L48.0262 730.517 Q46.8804 735.96 44.5251 738.379 Q42.138 740.798 38.0002 740.798 Q32.9713 740.798 30.2341 737.233 Q27.4968 733.668 27.4968 727.112 Q27.4968 723.865 27.9743 721.001 Q28.4517 718.136 29.4065 715.717 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M58.657 698.816 L77.5631 698.816 L77.5631 704.704 L28.3562 704.704 L28.3562 698.816 L33.7671 698.816 Q30.5842 696.97 29.0564 694.169 Q27.4968 691.336 27.4968 687.421 Q27.4968 680.928 32.6531 676.886 Q37.8093 672.812 46.212 672.812 Q54.6147 672.812 59.771 676.886 Q64.9272 680.928 64.9272 687.421 Q64.9272 691.336 63.3994 694.169 Q61.8398 696.97 58.657 698.816 M46.212 678.891 Q39.7508 678.891 36.0905 681.565 Q32.3984 684.207 32.3984 688.854 Q32.3984 693.501 36.0905 696.174 Q39.7508 698.816 46.212 698.816 Q52.6732 698.816 56.3653 696.174 Q60.0256 693.501 60.0256 688.854 Q60.0256 684.207 56.3653 681.565 Q52.6732 678.891 46.212 678.891 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M44.7161 632.613 L47.5806 632.613 L47.5806 659.54 Q53.6281 659.158 56.8109 655.911 Q59.9619 652.633 59.9619 646.808 Q59.9619 643.434 59.1344 640.283 Q58.3069 637.101 56.6518 633.981 L62.1899 633.981 Q63.5267 637.132 64.227 640.443 Q64.9272 643.753 64.9272 647.158 Q64.9272 655.688 59.9619 660.685 Q54.9967 665.651 46.5303 665.651 Q37.7774 665.651 32.6531 660.94 Q27.4968 656.198 27.4968 648.177 Q27.4968 640.984 32.1438 636.814 Q36.7589 632.613 44.7161 632.613 M42.9973 638.469 Q38.1912 638.533 35.3266 641.175 Q32.4621 643.785 32.4621 648.113 Q32.4621 653.015 35.2312 655.975 Q38.0002 658.903 43.0292 659.349 L42.9973 638.469 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M44.7161 592.509 L47.5806 592.509 L47.5806 619.436 Q53.6281 619.054 56.8109 615.807 Q59.9619 612.529 59.9619 606.704 Q59.9619 603.33 59.1344 600.179 Q58.3069 596.997 56.6518 593.877 L62.1899 593.877 Q63.5267 597.028 64.227 600.339 Q64.9272 603.649 64.9272 607.054 Q64.9272 615.584 59.9619 620.582 Q54.9967 625.547 46.5303 625.547 Q37.7774 625.547 32.6531 620.836 Q27.4968 616.094 27.4968 608.073 Q27.4968 600.88 32.1438 596.71 Q36.7589 592.509 44.7161 592.509 M42.9973 598.365 Q38.1912 598.429 35.3266 601.071 Q32.4621 603.681 32.4621 608.009 Q32.4621 612.911 35.2312 615.871 Q38.0002 618.799 43.0292 619.245 L42.9973 598.365 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M33.7671 559.439 L14.479 559.439 L14.479 553.582 L64.0042 553.582 L64.0042 559.439 L58.657 559.439 Q61.8398 561.285 63.3994 564.118 Q64.9272 566.919 64.9272 570.865 Q64.9272 577.327 59.771 581.401 Q54.6147 585.443 46.212 585.443 Q37.8093 585.443 32.6531 581.401 Q27.4968 577.327 27.4968 570.865 Q27.4968 566.919 29.0564 564.118 Q30.5842 561.285 33.7671 559.439 M46.212 579.395 Q52.6732 579.395 56.3653 576.754 Q60.0256 574.08 60.0256 569.433 Q60.0256 564.786 56.3653 562.112 Q52.6732 559.439 46.212 559.439 Q39.7508 559.439 36.0905 562.112 Q32.3984 564.786 32.3984 569.433 Q32.3984 574.08 36.0905 576.754 Q39.7508 579.395 46.212 579.395 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M49.9359 542.124 L28.3562 542.124 L28.3562 536.268 L49.7131 536.268 Q54.7739 536.268 57.3202 534.294 Q59.8346 532.321 59.8346 528.374 Q59.8346 523.632 56.8109 520.895 Q53.7872 518.125 48.5673 518.125 L28.3562 518.125 L28.3562 512.269 L64.0042 512.269 L64.0042 518.125 L58.5296 518.125 Q61.7762 520.258 63.3676 523.091 Q64.9272 525.892 64.9272 529.616 Q64.9272 535.758 61.1078 538.941 Q57.2883 542.124 49.9359 542.124 M27.4968 527.388 L27.4968 527.388 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M58.657 494.541 L77.5631 494.541 L77.5631 500.429 L28.3562 500.429 L28.3562 494.541 L33.7671 494.541 Q30.5842 492.694 29.0564 489.894 Q27.4968 487.061 27.4968 483.146 Q27.4968 476.653 32.6531 472.611 Q37.8093 468.537 46.212 468.537 Q54.6147 468.537 59.771 472.611 Q64.9272 476.653 64.9272 483.146 Q64.9272 487.061 63.3994 489.894 Q61.8398 492.694 58.657 494.541 M46.212 474.616 Q39.7508 474.616 36.0905 477.289 Q32.3984 479.931 32.3984 484.578 Q32.3984 489.225 36.0905 491.899 Q39.7508 494.541 46.212 494.541 Q52.6732 494.541 56.3653 491.899 Q60.0256 489.225 60.0256 484.578 Q60.0256 479.931 56.3653 477.289 Q52.6732 474.616 46.212 474.616 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip152)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="237.067,1384.24 530.505,1317.43 823.943,1284.03 1117.38,1263.99 1410.82,1250.62 1704.26,1241.08 1997.7,1233.92 2291.13,1228.36 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#e26f46; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="237.067,1384.24 530.505,1276.32 823.943,1208.87 1117.38,1162.72 1410.82,1129.16 1704.26,1103.65 1997.7,1083.61 2291.13,1067.44 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#3da44d; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="237.067,1384.24 530.505,1220.26 823.943,1083.61 1117.38,967.98 1410.82,868.87 1704.26,782.976 1997.7,707.818 2291.13,641.502 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#c271d2; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="237.067,1384.24 530.505,1202.91 823.943,1038.06 1117.38,887.543 1410.82,749.572 1704.26,622.639 1997.7,505.47 2291.13,396.98 "/>
-<polyline clip-path="url(#clip152)" style="stroke:#ac8d18; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="237.067,1384.24 530.505,1187.79 823.943,995.186 1117.38,806.326 1410.82,621.097 1704.26,439.397 1997.7,261.125 2291.13,86.1857 "/>
-<path clip-path="url(#clip150)" d="M248.022 404.149 L633.484 404.149 L633.484 93.1086 L248.022 93.1086  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"/>
-<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="248.022,404.149 633.484,404.149 633.484,93.1086 248.022,93.1086 248.022,404.149 "/>
-<polyline clip-path="url(#clip150)" style="stroke:#009af9; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="272.215,144.949 417.369,144.949 "/>
-<path clip-path="url(#clip150)" d="M445.843 158.34 L445.843 172.09 L441.561 172.09 L441.561 136.303 L445.843 136.303 L445.843 140.238 Q447.186 137.923 449.223 136.812 Q451.283 135.678 454.13 135.678 Q458.853 135.678 461.792 139.428 Q464.755 143.178 464.755 149.289 Q464.755 155.4 461.792 159.15 Q458.853 162.9 454.13 162.9 Q451.283 162.9 449.223 161.789 Q447.186 160.655 445.843 158.34 M460.334 149.289 Q460.334 144.59 458.39 141.928 Q456.468 139.243 453.089 139.243 Q449.709 139.243 447.765 141.928 Q445.843 144.59 445.843 149.289 Q445.843 153.988 447.765 156.673 Q449.709 159.335 453.089 159.335 Q456.468 159.335 458.39 156.673 Q460.334 153.988 460.334 149.289 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M472.371 140.701 L502.047 140.701 L502.047 144.59 L472.371 144.59 L472.371 140.701 M472.371 150.145 L502.047 150.145 L502.047 154.081 L472.371 154.081 L472.371 150.145 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M522.139 130.747 Q518.528 130.747 516.699 134.312 Q514.894 137.854 514.894 144.983 Q514.894 152.09 516.699 155.655 Q518.528 159.196 522.139 159.196 Q525.773 159.196 527.579 155.655 Q529.408 152.09 529.408 144.983 Q529.408 137.854 527.579 134.312 Q525.773 130.747 522.139 130.747 M522.139 127.044 Q527.949 127.044 531.005 131.65 Q534.084 136.233 534.084 144.983 Q534.084 153.71 531.005 158.317 Q527.949 162.9 522.139 162.9 Q516.329 162.9 513.25 158.317 Q510.195 153.71 510.195 144.983 Q510.195 136.233 513.25 131.65 Q516.329 127.044 522.139 127.044 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M542.301 156.349 L547.185 156.349 L547.185 162.229 L542.301 162.229 L542.301 156.349 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M557.417 127.669 L575.773 127.669 L575.773 131.604 L561.699 131.604 L561.699 140.076 Q562.718 139.729 563.736 139.567 Q564.755 139.382 565.773 139.382 Q571.56 139.382 574.94 142.553 Q578.319 145.724 578.319 151.141 Q578.319 156.719 574.847 159.821 Q571.375 162.9 565.056 162.9 Q562.88 162.9 560.611 162.53 Q558.366 162.159 555.958 161.418 L555.958 156.719 Q558.042 157.854 560.264 158.409 Q562.486 158.965 564.963 158.965 Q568.968 158.965 571.306 156.858 Q573.644 154.752 573.644 151.141 Q573.644 147.53 571.306 145.423 Q568.968 143.317 564.963 143.317 Q563.088 143.317 561.213 143.733 Q559.361 144.15 557.417 145.03 L557.417 127.669 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip150)" style="stroke:#e26f46; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="272.215,196.789 417.369,196.789 "/>
-<path clip-path="url(#clip150)" d="M445.843 210.18 L445.843 223.93 L441.561 223.93 L441.561 188.143 L445.843 188.143 L445.843 192.078 Q447.186 189.763 449.223 188.652 Q451.283 187.518 454.13 187.518 Q458.853 187.518 461.792 191.268 Q464.755 195.018 464.755 201.129 Q464.755 207.24 461.792 210.99 Q458.853 214.74 454.13 214.74 Q451.283 214.74 449.223 213.629 Q447.186 212.495 445.843 210.18 M460.334 201.129 Q460.334 196.43 458.39 193.768 Q456.468 191.083 453.089 191.083 Q449.709 191.083 447.765 193.768 Q445.843 196.43 445.843 201.129 Q445.843 205.828 447.765 208.513 Q449.709 211.175 453.089 211.175 Q456.468 211.175 458.39 208.513 Q460.334 205.828 460.334 201.129 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M472.371 192.541 L502.047 192.541 L502.047 196.43 L472.371 196.43 L472.371 192.541 M472.371 201.985 L502.047 201.985 L502.047 205.921 L472.371 205.921 L472.371 201.985 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M522.139 182.587 Q518.528 182.587 516.699 186.152 Q514.894 189.694 514.894 196.823 Q514.894 203.93 516.699 207.495 Q518.528 211.036 522.139 211.036 Q525.773 211.036 527.579 207.495 Q529.408 203.93 529.408 196.823 Q529.408 189.694 527.579 186.152 Q525.773 182.587 522.139 182.587 M522.139 178.884 Q527.949 178.884 531.005 183.49 Q534.084 188.073 534.084 196.823 Q534.084 205.55 531.005 210.157 Q527.949 214.74 522.139 214.74 Q516.329 214.74 513.25 210.157 Q510.195 205.55 510.195 196.823 Q510.195 188.073 513.25 183.49 Q516.329 178.884 522.139 178.884 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M542.301 208.189 L547.185 208.189 L547.185 214.069 L542.301 214.069 L542.301 208.189 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M556.19 179.509 L578.412 179.509 L578.412 181.499 L565.866 214.069 L560.982 214.069 L572.787 183.444 L556.19 183.444 L556.19 179.509 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip150)" style="stroke:#3da44d; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="272.215,248.629 417.369,248.629 "/>
-<path clip-path="url(#clip150)" d="M445.843 262.02 L445.843 275.77 L441.561 275.77 L441.561 239.983 L445.843 239.983 L445.843 243.918 Q447.186 241.603 449.223 240.492 Q451.283 239.358 454.13 239.358 Q458.853 239.358 461.792 243.108 Q464.755 246.858 464.755 252.969 Q464.755 259.08 461.792 262.83 Q458.853 266.58 454.13 266.58 Q451.283 266.58 449.223 265.469 Q447.186 264.335 445.843 262.02 M460.334 252.969 Q460.334 248.27 458.39 245.608 Q456.468 242.923 453.089 242.923 Q449.709 242.923 447.765 245.608 Q445.843 248.27 445.843 252.969 Q445.843 257.668 447.765 260.353 Q449.709 263.015 453.089 263.015 Q456.468 263.015 458.39 260.353 Q460.334 257.668 460.334 252.969 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M472.371 244.381 L502.047 244.381 L502.047 248.27 L472.371 248.27 L472.371 244.381 M472.371 253.825 L502.047 253.825 L502.047 257.761 L472.371 257.761 L472.371 253.825 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M522.139 234.427 Q518.528 234.427 516.699 237.992 Q514.894 241.534 514.894 248.663 Q514.894 255.77 516.699 259.335 Q518.528 262.876 522.139 262.876 Q525.773 262.876 527.579 259.335 Q529.408 255.77 529.408 248.663 Q529.408 241.534 527.579 237.992 Q525.773 234.427 522.139 234.427 M522.139 230.724 Q527.949 230.724 531.005 235.33 Q534.084 239.913 534.084 248.663 Q534.084 257.39 531.005 261.997 Q527.949 266.58 522.139 266.58 Q516.329 266.58 513.25 261.997 Q510.195 257.39 510.195 248.663 Q510.195 239.913 513.25 235.33 Q516.329 230.724 522.139 230.724 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M542.301 260.029 L547.185 260.029 L547.185 265.909 L542.301 265.909 L542.301 260.029 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M557.509 265.191 L557.509 260.932 Q559.269 261.765 561.074 262.205 Q562.88 262.645 564.616 262.645 Q569.245 262.645 571.676 259.543 Q574.13 256.418 574.477 250.075 Q573.134 252.066 571.074 253.131 Q569.014 254.196 566.514 254.196 Q561.329 254.196 558.296 251.071 Q555.287 247.923 555.287 242.483 Q555.287 237.159 558.435 233.941 Q561.583 230.724 566.815 230.724 Q572.81 230.724 575.958 235.33 Q579.13 239.913 579.13 248.663 Q579.13 256.835 575.241 261.719 Q571.375 266.58 564.824 266.58 Q563.065 266.58 561.259 266.233 Q559.454 265.885 557.509 265.191 M566.815 250.538 Q569.963 250.538 571.792 248.386 Q573.644 246.233 573.644 242.483 Q573.644 238.756 571.792 236.603 Q569.963 234.427 566.815 234.427 Q563.667 234.427 561.815 236.603 Q559.986 238.756 559.986 242.483 Q559.986 246.233 561.815 248.386 Q563.667 250.538 566.815 250.538 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip150)" style="stroke:#c271d2; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="272.215,300.469 417.369,300.469 "/>
-<path clip-path="url(#clip150)" d="M445.843 313.86 L445.843 327.61 L441.561 327.61 L441.561 291.823 L445.843 291.823 L445.843 295.758 Q447.186 293.443 449.223 292.332 Q451.283 291.198 454.13 291.198 Q458.853 291.198 461.792 294.948 Q464.755 298.698 464.755 304.809 Q464.755 310.92 461.792 314.67 Q458.853 318.42 454.13 318.42 Q451.283 318.42 449.223 317.309 Q447.186 316.175 445.843 313.86 M460.334 304.809 Q460.334 300.11 458.39 297.448 Q456.468 294.763 453.089 294.763 Q449.709 294.763 447.765 297.448 Q445.843 300.11 445.843 304.809 Q445.843 309.508 447.765 312.193 Q449.709 314.855 453.089 314.855 Q456.468 314.855 458.39 312.193 Q460.334 309.508 460.334 304.809 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M472.371 296.221 L502.047 296.221 L502.047 300.11 L472.371 300.11 L472.371 296.221 M472.371 305.665 L502.047 305.665 L502.047 309.601 L472.371 309.601 L472.371 305.665 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M522.139 286.267 Q518.528 286.267 516.699 289.832 Q514.894 293.374 514.894 300.503 Q514.894 307.61 516.699 311.175 Q518.528 314.716 522.139 314.716 Q525.773 314.716 527.579 311.175 Q529.408 307.61 529.408 300.503 Q529.408 293.374 527.579 289.832 Q525.773 286.267 522.139 286.267 M522.139 282.564 Q527.949 282.564 531.005 287.17 Q534.084 291.753 534.084 300.503 Q534.084 309.23 531.005 313.837 Q527.949 318.42 522.139 318.42 Q516.329 318.42 513.25 313.837 Q510.195 309.23 510.195 300.503 Q510.195 291.753 513.25 287.17 Q516.329 282.564 522.139 282.564 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M542.301 311.869 L547.185 311.869 L547.185 317.749 L542.301 317.749 L542.301 311.869 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M557.509 317.031 L557.509 312.772 Q559.269 313.605 561.074 314.045 Q562.88 314.485 564.616 314.485 Q569.245 314.485 571.676 311.383 Q574.13 308.258 574.477 301.915 Q573.134 303.906 571.074 304.971 Q569.014 306.036 566.514 306.036 Q561.329 306.036 558.296 302.911 Q555.287 299.763 555.287 294.323 Q555.287 288.999 558.435 285.781 Q561.583 282.564 566.815 282.564 Q572.81 282.564 575.958 287.17 Q579.13 291.753 579.13 300.503 Q579.13 308.675 575.241 313.559 Q571.375 318.42 564.824 318.42 Q563.065 318.42 561.259 318.073 Q559.454 317.725 557.509 317.031 M566.815 302.378 Q569.963 302.378 571.792 300.226 Q573.644 298.073 573.644 294.323 Q573.644 290.596 571.792 288.443 Q569.963 286.267 566.815 286.267 Q563.667 286.267 561.815 288.443 Q559.986 290.596 559.986 294.323 Q559.986 298.073 561.815 300.226 Q563.667 302.378 566.815 302.378 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M587.579 283.189 L605.935 283.189 L605.935 287.124 L591.861 287.124 L591.861 295.596 Q592.88 295.249 593.898 295.087 Q594.917 294.902 595.935 294.902 Q601.722 294.902 605.102 298.073 Q608.481 301.244 608.481 306.661 Q608.481 312.239 605.009 315.341 Q601.537 318.42 595.218 318.42 Q593.042 318.42 590.773 318.05 Q588.528 317.679 586.12 316.938 L586.12 312.239 Q588.204 313.374 590.426 313.929 Q592.648 314.485 595.125 314.485 Q599.13 314.485 601.468 312.378 Q603.805 310.272 603.805 306.661 Q603.805 303.05 601.468 300.943 Q599.13 298.837 595.125 298.837 Q593.25 298.837 591.375 299.253 Q589.523 299.67 587.579 300.55 L587.579 283.189 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip150)" style="stroke:#ac8d18; stroke-linecap:round; stroke-linejoin:round; stroke-width:8; stroke-opacity:1; fill:none" points="272.215,352.309 417.369,352.309 "/>
-<path clip-path="url(#clip150)" d="M445.843 365.7 L445.843 379.45 L441.561 379.45 L441.561 343.663 L445.843 343.663 L445.843 347.598 Q447.186 345.283 449.223 344.172 Q451.283 343.038 454.13 343.038 Q458.853 343.038 461.792 346.788 Q464.755 350.538 464.755 356.649 Q464.755 362.76 461.792 366.51 Q458.853 370.26 454.13 370.26 Q451.283 370.26 449.223 369.149 Q447.186 368.015 445.843 365.7 M460.334 356.649 Q460.334 351.95 458.39 349.288 Q456.468 346.603 453.089 346.603 Q449.709 346.603 447.765 349.288 Q445.843 351.95 445.843 356.649 Q445.843 361.348 447.765 364.033 Q449.709 366.695 453.089 366.695 Q456.468 366.695 458.39 364.033 Q460.334 361.348 460.334 356.649 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M472.371 348.061 L502.047 348.061 L502.047 351.95 L472.371 351.95 L472.371 348.061 M472.371 357.505 L502.047 357.505 L502.047 361.441 L472.371 361.441 L472.371 357.505 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M522.139 338.107 Q518.528 338.107 516.699 341.672 Q514.894 345.214 514.894 352.343 Q514.894 359.45 516.699 363.015 Q518.528 366.556 522.139 366.556 Q525.773 366.556 527.579 363.015 Q529.408 359.45 529.408 352.343 Q529.408 345.214 527.579 341.672 Q525.773 338.107 522.139 338.107 M522.139 334.404 Q527.949 334.404 531.005 339.01 Q534.084 343.593 534.084 352.343 Q534.084 361.07 531.005 365.677 Q527.949 370.26 522.139 370.26 Q516.329 370.26 513.25 365.677 Q510.195 361.07 510.195 352.343 Q510.195 343.593 513.25 339.01 Q516.329 334.404 522.139 334.404 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M542.301 363.709 L547.185 363.709 L547.185 369.589 L542.301 369.589 L542.301 363.709 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M557.509 368.871 L557.509 364.612 Q559.269 365.445 561.074 365.885 Q562.88 366.325 564.616 366.325 Q569.245 366.325 571.676 363.223 Q574.13 360.098 574.477 353.755 Q573.134 355.746 571.074 356.811 Q569.014 357.876 566.514 357.876 Q561.329 357.876 558.296 354.751 Q555.287 351.603 555.287 346.163 Q555.287 340.839 558.435 337.621 Q561.583 334.404 566.815 334.404 Q572.81 334.404 575.958 339.01 Q579.13 343.593 579.13 352.343 Q579.13 360.515 575.241 365.399 Q571.375 370.26 564.824 370.26 Q563.065 370.26 561.259 369.913 Q559.454 369.565 557.509 368.871 M566.815 354.218 Q569.963 354.218 571.792 352.066 Q573.644 349.913 573.644 346.163 Q573.644 342.436 571.792 340.283 Q569.963 338.107 566.815 338.107 Q563.667 338.107 561.815 340.283 Q559.986 342.436 559.986 346.163 Q559.986 349.913 561.815 352.066 Q563.667 354.218 566.815 354.218 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip150)" d="M587.671 368.871 L587.671 364.612 Q589.431 365.445 591.236 365.885 Q593.042 366.325 594.778 366.325 Q599.407 366.325 601.838 363.223 Q604.292 360.098 604.639 353.755 Q603.296 355.746 601.236 356.811 Q599.176 357.876 596.676 357.876 Q591.491 357.876 588.458 354.751 Q585.449 351.603 585.449 346.163 Q585.449 340.839 588.597 337.621 Q591.745 334.404 596.977 334.404 Q602.972 334.404 606.12 339.01 Q609.292 343.593 609.292 352.343 Q609.292 360.515 605.403 365.399 Q601.537 370.26 594.986 370.26 Q593.227 370.26 591.421 369.913 Q589.616 369.565 587.671 368.871 M596.977 354.218 Q600.125 354.218 601.954 352.066 Q603.805 349.913 603.805 346.163 Q603.805 342.436 601.954 340.283 Q600.125 338.107 596.977 338.107 Q593.829 338.107 591.977 340.283 Q590.148 342.436 590.148 346.163 Q590.148 349.913 591.977 352.066 Q593.829 354.218 596.977 354.218 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /></svg>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Parallel-computing-in-Julia"><a href="https://docs.julialang.org/en/v1/manual/parallel-computing/">Parallel computing</a> in Julia<a class="anchor-link" href="#Parallel-computing-in-Julia">&#182;</a></h3>
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Julia provides support for all types of parallelism mentioned above</p>
-<table>
-<thead><tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Instruction level parallelism</strong> (e.g. SIMD)</td>
-<td>→ <a href="https://docs.julialang.org/en/v1/base/base/#Base.SimdLoop.@simd"><code>@simd</code></a>, <a href="https://github.com/eschnett/SIMD.jl">SIMD.jl</a>, ...</td>
-</tr>
-<tr>
-<td><strong>Multi-threading</strong> (shared memory)</td>
-<td>→ <a href="https://docs.julialang.org/en/v1/base/multi-threading/">Base.Threads</a>, <a href="https://github.com/tkf/ThreadsX.jl">ThreadsX.jl</a>, <a href="https://github.com/JuliaFolds/FLoops.jl">FLoops.jl</a>, ..</td>
-</tr>
-<tr>
-<td><strong>Multi-processing</strong> (shared system memory)</td>
-<td>→ <a href="https://docs.julialang.org/en/v1/stdlib/Distributed/">Distributed.jl</a>, <a href="https://github.com/JuliaParallel/MPI.jl">MPI.jl</a>, ...</td>
-</tr>
-<tr>
-<td><strong>Distributed processing</strong> (typically no shared memory)</td>
-<td>→ <a href="https://docs.julialang.org/en/v1/stdlib/Distributed/">Distributed.jl</a>, <a href="https://github.com/JuliaParallel/MPI.jl">MPI.jl</a>, ...</td>
-</tr>
-<tr>
-<td><strong>GPU programming</strong></td>
-<td>→ <a href="https://github.com/JuliaGPU/CUDA.jl">CUDA.jl</a>, <a href="https://github.com/JuliaGPU/AMDGPU.jl">AMDGPU.jl</a>, <a href="https://github.com/JuliaGPU/oneAPI.jl">oneAPI.jl</a>, <a href="https://github.com/JuliaGPU/KernelAbstractions.jl">KernelAbstractions.jl</a>, ...</td>
-</tr>
-</tbody>
-</table>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@code_typed</span> <span class="n">optimize</span><span class="o">=</span><span class="n">false</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span>
+</pre></div>
 
+     </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Reference: <a href="https://github.com/carstenbauer/JuliaUCL24">JuliaUCL24</a></p>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@code_lowered</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span>
+</pre></div>
+
+     </div>
 </div>
 </div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">debuginfo</span><span class="o">=</span><span class="p">:</span><span class="n">none</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@code_native</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@code_warntype</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 
