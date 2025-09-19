@@ -7541,17 +7541,8 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">"@colab"</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">([</span>
-<span class="w">    </span><span class="s">"CUDA"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"KernelAbstractions"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"Atomix"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"AcceleratedKernels"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"BenchmarkTools"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"Adapt"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"NVTX"</span><span class="p">,</span>
-<span class="w">    </span><span class="s">"ImageShow"</span><span class="p">,</span>
-<span class="p">])</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">"colab6"</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="s">"CUDA"</span><span class="p">,</span><span class="w"> </span><span class="s">"KernelAbstractions"</span><span class="p">,</span><span class="w"> </span><span class="s">"Adapt"</span><span class="p">,</span><span class="w"> </span><span class="s">"NVTX"</span><span class="p">,</span><span class="w"> </span><span class="s">"ImageShow"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -7593,6 +7584,25 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Different-layers-of-abstraction">Different layers of abstraction<a class="anchor-link" href="#Different-layers-of-abstraction">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">X_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="n">Y_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuVector</span><span class="p">(</span><span class="n">X_gpu</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuVector</span><span class="p">(</span><span class="n">Y_gpu</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -7694,7 +7704,46 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="How-to-use-KernelAbstractions">How to use KernelAbstractions<a class="anchor-link" href="#How-to-use-KernelAbstractions">¶</a></h4><ul>
+<h3 id="KernelAbstractions.jl">KernelAbstractions.jl<a class="anchor-link" href="#KernelAbstractions.jl">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<img alt="No description has been provided for this image" src="./Graphics/KA1.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA2.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA3.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA4.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA5.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA6.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA7.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA8.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA9.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA10.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA11.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA12.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA13.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA14.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA15.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA16.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA17.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="./Graphics/KA18.png" width="1000px"/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Summary----How-to-use-KernelAbstractions?">Summary -- How to use KernelAbstractions?<a class="anchor-link" href="#Summary----How-to-use-KernelAbstractions?">¶</a></h4><ul>
 <li>Use <code>@kernel function mykernel(args...) end</code> to write a GPU-style program</li>
 <li>Instantiate kernel for a backend <code>kernel = mykernel(backend)</code></li>
 <li>Backends come from Vendor specific libraries</li>
@@ -7791,58 +7840,6 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="High-level-array-based-programming">High-level array based programming<a class="anchor-link" href="#High-level-array-based-programming">¶</a></h3><p>Julia and GPUArrays.jl provide support for an efficient GPU programming environment build around array abstractions and higher-order functions.</p>
-<ul>
-<li><strong>Vocabulary of operations</strong>: <code>map</code>, <code>broadcast</code>, <code>scan</code>, <code>reduce</code>, ...
-Map naturally onto GPU execution models</li>
-<li><strong>Compiled to efficient code</strong>: multiple dispatch, specialization
-Write generic, reusable applications</li>
-<li>BLAS (matrix-multiply, ...), and other libraries like FFT</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Array types -- <strong>where</strong> memory resides and <strong>how</strong> code is executed.
-Note that data movement is explicit.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>A = Matrix{Float64}(undef, 64, 32)</code></td>
-<td>CPU</td>
-</tr>
-<tr>
-<td><code>A = CuMatrix{Float64}(undef, 64, 32)</code></td>
-<td>Nvidia GPU</td>
-</tr>
-<tr>
-<td><code>A = ROCMatrix{Float64}(undef, 64, 32)</code></td>
-<td>AMD GPU</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="What-makes-an-application-portable?">What makes an application portable?<a class="anchor-link" href="#What-makes-an-application-portable?">¶</a></h3><ol>
 <li>Can I <strong>run</strong> it on a different compute architecture<ol>
 <li>Different CPU architectures</li>
@@ -7903,448 +7900,7 @@ Note that data movement is explicit.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="A-first-GPU-kernel">A first GPU kernel<a class="anchor-link" href="#A-first-GPU-kernel">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">copy_cpu!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="w">    </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
-<span class="w">  </span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">copy_kernel!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@index</span><span class="p">(</span><span class="n">Global</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">copy_ka!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_backend</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@assert</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@assert</span><span class="w"> </span><span class="n">get_backend</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">backend</span>
-
-<span class="w">  </span><span class="n">kernel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy_kernel!</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-<span class="w">  </span><span class="n">kernel</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">ndrange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
-<span class="w">  </span><span class="k">return</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">CUDA</span><span class="o">:</span><span class="w"> </span><span class="n">i32</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">copy_kernel_cuda!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">blockIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="n">i32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="w">      </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
-<span class="w">  </span><span class="k">end</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">nothing</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">copy_cuda!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">kernel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@cuda</span><span class="w"> </span><span class="n">launch</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="n">copy_kernel_cuda!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">launch_configuration</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
-<span class="w">  </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="w"> </span><span class="n">config</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
-<span class="w">  </span><span class="n">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cld</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="w"> </span><span class="n">threads</span><span class="p">)</span>
-
-<span class="w">  </span><span class="n">kernel</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">;</span><span class="w"> </span><span class="n">threads</span><span class="p">,</span><span class="w"> </span><span class="n">blocks</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">64_000</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">let</span>
-<span class="w">  </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">copy_cpu!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@assert</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">B</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Julia GPU ecosystem follows the motto: Compute follows Data</p>
-<p>So let's move our data to the GPU!</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">d_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">CuArray</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">d_B</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">let</span>
-<span class="w">  </span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">copy_cuda!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@assert</span><span class="w"> </span><span class="n">d_A</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">d_B</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that Julia GPU Ecosystem, synchronizes the GPU on access. So we are launchign two GPU kernels here, first the copy, then the comparision and they are both executing asynchronously, but ordered with respect to each other.</p>
-<p>We then "wait" for the result of the comparision.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">copy_cuda!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">d_B</span><span class="p">)</span><span class="w"> </span><span class="n">setup</span><span class="o">=</span><span class="p">(</span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@profile</span><span class="w"> </span><span class="k">let</span>
-<span class="w">  </span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="n">copy_cuda!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>So there seems to be a discrepancy between the measurement of <code>@benchmark</code> and <code>CUDA.@profile</code>, <code>@benchmark</code> seems to vastly over-estimate the performance of the GPU code. To remedy this we need to include a synchronization operation with benchmarking.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="p">(</span><span class="n">copy_cuda!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">d_B</span><span class="p">))</span><span class="w"> </span><span class="n">setup</span><span class="o">=</span><span class="p">(</span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>With KernelAbstractions we can now write code that is portable and can be used both for data that resides on the CPU as well as the GPU, therefore implementing the "Compute follows Data" paradigm.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">let</span>
-<span class="w">  </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">copy_ka!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@assert</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">B</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">let</span>
-<span class="w">  </span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">copy_ka!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="nd">@assert</span><span class="w"> </span><span class="n">d_A</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">d_B</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">copy_ka!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="n">setup</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="p">(</span><span class="n">copy_ka!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">d_B</span><span class="p">))</span><span class="w"> </span><span class="n">setup</span><span class="o">=</span><span class="p">(</span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@profile</span><span class="w"> </span><span class="k">let</span>
-<span class="w">  </span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="n">copy_ka!</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We can see that KernelAbstractions is a bit slower than pure CUDA, and that is partially expected due to some convenience functionality.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@kernel</span><span class="w"> </span><span class="n">unsafe_indices</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">copy_kernel_faster!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
-<span class="w">  </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@uniform</span><span class="w"> </span><span class="n">prod</span><span class="p">(</span><span class="nd">@groupsize</span><span class="p">())</span>
-<span class="w">  </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nd">@index</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span><span class="w"> </span><span class="n">Linear</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="n">i32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nd">@index</span><span class="p">(</span><span class="n">Local</span><span class="p">,</span><span class="w"> </span><span class="n">Linear</span><span class="p">)</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="w">    </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
-<span class="w">  </span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@profile</span><span class="w"> </span><span class="k">let</span>
-<span class="w">  </span><span class="n">d_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">d_B</span><span class="p">)</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="n">copy_kernel_faster!</span><span class="p">(</span><span class="n">CUDABackend</span><span class="p">())(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">d_B</span><span class="p">,</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">d_A</span><span class="p">))</span>
-<span class="w">  </span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="A-more-compilcated-kernel----transpose">A more compilcated kernel -- transpose<a class="anchor-link" href="#A-more-compilcated-kernel----transpose">¶</a></h2>
+<h2 id="GPU-kernel----transpose">GPU kernel -- transpose<a class="anchor-link" href="#GPU-kernel----transpose">¶</a></h2>
 </div>
 </div>
 </div>
