@@ -14028,12 +14028,169 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-julia"><pre><span></span><span class="k">import</span> <span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;colab5&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="s">&quot;BenchmarkTools&quot;</span><span class="p">,</span> <span class="s">&quot;CUDA&quot;</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre><span class="ansi-green-intense-fg ansi-bold">  Activating</span> new project at `/content/colab5`
+<span class="ansi-green-intense-fg ansi-bold">    Updating</span> registry at `~/.julia/registries/General.toml`
+<span class="ansi-green-intense-fg ansi-bold">   Resolving</span> package versions...
+<span class="ansi-green-intense-fg ansi-bold">   Installed</span> BenchmarkTools ─ v1.6.0
+<span class="ansi-green-intense-fg ansi-bold">    Updating</span> `/content/colab5/Project.toml`
+  <span class="ansi-black-intense-fg">[6e4b80f9] </span><span class="ansi-green-intense-fg">+ BenchmarkTools v1.6.0</span>
+  <span class="ansi-black-intense-fg">[052768ef] </span><span class="ansi-green-intense-fg">+ CUDA v5.8.3</span>
+<span class="ansi-green-intense-fg ansi-bold">    Updating</span> `/content/colab5/Manifest.toml`
+  <span class="ansi-black-intense-fg">[621f4979] </span><span class="ansi-green-intense-fg">+ AbstractFFTs v1.5.0</span>
+  <span class="ansi-black-intense-fg">[79e6a3ab] </span><span class="ansi-green-intense-fg">+ Adapt v4.3.0</span>
+  <span class="ansi-black-intense-fg">[a9b6321e] </span><span class="ansi-green-intense-fg">+ Atomix v1.1.2</span>
+  <span class="ansi-black-intense-fg">[ab4f0b2a] </span><span class="ansi-green-intense-fg">+ BFloat16s v0.5.1</span>
+  <span class="ansi-black-intense-fg">[6e4b80f9] </span><span class="ansi-green-intense-fg">+ BenchmarkTools v1.6.0</span>
+  <span class="ansi-black-intense-fg">[fa961155] </span><span class="ansi-green-intense-fg">+ CEnum v0.5.0</span>
+  <span class="ansi-black-intense-fg">[052768ef] </span><span class="ansi-green-intense-fg">+ CUDA v5.8.3</span>
+  <span class="ansi-black-intense-fg">[1af6417a] </span><span class="ansi-green-intense-fg">+ CUDA_Runtime_Discovery v1.0.0</span>
+  <span class="ansi-black-intense-fg">[3da002f7] </span><span class="ansi-green-intense-fg">+ ColorTypes v0.12.1</span>
+  <span class="ansi-black-intense-fg">[5ae59095] </span><span class="ansi-green-intense-fg">+ Colors v0.13.1</span>
+  <span class="ansi-black-intense-fg">[34da2185] </span><span class="ansi-green-intense-fg">+ Compat v4.18.0</span>
+  <span class="ansi-black-intense-fg">[a8cc5b0e] </span><span class="ansi-green-intense-fg">+ Crayons v4.1.1</span>
+  <span class="ansi-black-intense-fg">[9a962f9c] </span><span class="ansi-green-intense-fg">+ DataAPI v1.16.0</span>
+  <span class="ansi-black-intense-fg">[a93c6f00] </span><span class="ansi-green-intense-fg">+ DataFrames v1.8.0</span>
+  <span class="ansi-black-intense-fg">[864edb3b] </span><span class="ansi-green-intense-fg">+ DataStructures v0.19.1</span>
+  <span class="ansi-black-intense-fg">[e2d170a0] </span><span class="ansi-green-intense-fg">+ DataValueInterfaces v1.0.0</span>
+  <span class="ansi-black-intense-fg">[e2ba6199] </span><span class="ansi-green-intense-fg">+ ExprTools v0.1.10</span>
+  <span class="ansi-black-intense-fg">[53c48c17] </span><span class="ansi-green-intense-fg">+ FixedPointNumbers v0.8.5</span>
+  <span class="ansi-black-intense-fg">[0c68f7d7] </span><span class="ansi-green-intense-fg">+ GPUArrays v11.2.5</span>
+  <span class="ansi-black-intense-fg">[46192b85] </span><span class="ansi-green-intense-fg">+ GPUArraysCore v0.2.0</span>
+  <span class="ansi-black-intense-fg">[61eb1bfa] </span><span class="ansi-green-intense-fg">+ GPUCompiler v1.6.1</span>
+  <span class="ansi-black-intense-fg">[096a3bc2] </span><span class="ansi-green-intense-fg">+ GPUToolbox v0.3.0</span>
+  <span class="ansi-black-intense-fg">[076d061b] </span><span class="ansi-green-intense-fg">+ HashArrayMappedTries v0.2.0</span>
+  <span class="ansi-black-intense-fg">[842dd82b] </span><span class="ansi-green-intense-fg">+ InlineStrings v1.4.5</span>
+  <span class="ansi-black-intense-fg">[41ab1584] </span><span class="ansi-green-intense-fg">+ InvertedIndices v1.3.1</span>
+  <span class="ansi-black-intense-fg">[82899510] </span><span class="ansi-green-intense-fg">+ IteratorInterfaceExtensions v1.0.0</span>
+  <span class="ansi-black-intense-fg">[692b3bcd] </span><span class="ansi-green-intense-fg">+ JLLWrappers v1.7.1</span>
+  <span class="ansi-black-intense-fg">[682c06a0] </span><span class="ansi-green-intense-fg">+ JSON v0.21.4</span>
+  <span class="ansi-black-intense-fg">[63c18a36] </span><span class="ansi-green-intense-fg">+ KernelAbstractions v0.9.38</span>
+  <span class="ansi-black-intense-fg">[929cbde3] </span><span class="ansi-green-intense-fg">+ LLVM v9.4.2</span>
+  <span class="ansi-black-intense-fg">[8b046642] </span><span class="ansi-green-intense-fg">+ LLVMLoopInfo v1.0.0</span>
+  <span class="ansi-black-intense-fg">[b964fa9f] </span><span class="ansi-green-intense-fg">+ LaTeXStrings v1.4.0</span>
+  <span class="ansi-black-intense-fg">[1914dd2f] </span><span class="ansi-green-intense-fg">+ MacroTools v0.5.16</span>
+  <span class="ansi-black-intense-fg">[e1d29d7a] </span><span class="ansi-green-intense-fg">+ Missings v1.2.0</span>
+  <span class="ansi-black-intense-fg">[5da4648a] </span><span class="ansi-green-intense-fg">+ NVTX v1.0.1</span>
+  <span class="ansi-black-intense-fg">[bac558e1] </span><span class="ansi-green-intense-fg">+ OrderedCollections v1.8.1</span>
+  <span class="ansi-black-intense-fg">[69de0a69] </span><span class="ansi-green-intense-fg">+ Parsers v2.8.3</span>
+  <span class="ansi-black-intense-fg">[2dfb63ee] </span><span class="ansi-green-intense-fg">+ PooledArrays v1.4.3</span>
+<span class="ansi-yellow-fg">⌅</span> <span class="ansi-black-intense-fg">[aea7be01] </span><span class="ansi-green-intense-fg">+ PrecompileTools v1.2.1</span>
+  <span class="ansi-black-intense-fg">[21216c6a] </span><span class="ansi-green-intense-fg">+ Preferences v1.5.0</span>
+<span class="ansi-yellow-fg">⌅</span> <span class="ansi-black-intense-fg">[08abe8d2] </span><span class="ansi-green-intense-fg">+ PrettyTables v2.4.0</span>
+  <span class="ansi-black-intense-fg">[74087812] </span><span class="ansi-green-intense-fg">+ Random123 v1.7.1</span>
+  <span class="ansi-black-intense-fg">[e6cf234a] </span><span class="ansi-green-intense-fg">+ RandomNumbers v1.6.0</span>
+  <span class="ansi-black-intense-fg">[189a3867] </span><span class="ansi-green-intense-fg">+ Reexport v1.2.2</span>
+  <span class="ansi-black-intense-fg">[ae029012] </span><span class="ansi-green-intense-fg">+ Requires v1.3.1</span>
+  <span class="ansi-black-intense-fg">[7e506255] </span><span class="ansi-green-intense-fg">+ ScopedValues v1.5.0</span>
+  <span class="ansi-black-intense-fg">[6c6a2e73] </span><span class="ansi-green-intense-fg">+ Scratch v1.3.0</span>
+  <span class="ansi-black-intense-fg">[91c51154] </span><span class="ansi-green-intense-fg">+ SentinelArrays v1.4.8</span>
+  <span class="ansi-black-intense-fg">[a2af1166] </span><span class="ansi-green-intense-fg">+ SortingAlgorithms v1.2.2</span>
+  <span class="ansi-black-intense-fg">[90137ffa] </span><span class="ansi-green-intense-fg">+ StaticArrays v1.9.15</span>
+  <span class="ansi-black-intense-fg">[1e83bf80] </span><span class="ansi-green-intense-fg">+ StaticArraysCore v1.4.3</span>
+  <span class="ansi-black-intense-fg">[10745b16] </span><span class="ansi-green-intense-fg">+ Statistics v1.11.1</span>
+  <span class="ansi-black-intense-fg">[892a3eda] </span><span class="ansi-green-intense-fg">+ StringManipulation v0.4.1</span>
+  <span class="ansi-black-intense-fg">[3783bdb8] </span><span class="ansi-green-intense-fg">+ TableTraits v1.0.1</span>
+  <span class="ansi-black-intense-fg">[bd369af6] </span><span class="ansi-green-intense-fg">+ Tables v1.12.1</span>
+  <span class="ansi-black-intense-fg">[e689c965] </span><span class="ansi-green-intense-fg">+ Tracy v0.1.6</span>
+  <span class="ansi-black-intense-fg">[013be700] </span><span class="ansi-green-intense-fg">+ UnsafeAtomics v0.3.0</span>
+  <span class="ansi-black-intense-fg">[d1e2174e] </span><span class="ansi-green-intense-fg">+ CUDA_Compiler_jll v0.2.1+0</span>
+  <span class="ansi-black-intense-fg">[4ee394cb] </span><span class="ansi-green-intense-fg">+ CUDA_Driver_jll v13.0.1+0</span>
+  <span class="ansi-black-intense-fg">[76a88914] </span><span class="ansi-green-intense-fg">+ CUDA_Runtime_jll v0.19.1+0</span>
+  <span class="ansi-black-intense-fg">[9c1d0b0a] </span><span class="ansi-green-intense-fg">+ JuliaNVTXCallbacks_jll v0.2.1+0</span>
+  <span class="ansi-black-intense-fg">[dad2f222] </span><span class="ansi-green-intense-fg">+ LLVMExtra_jll v0.0.37+2</span>
+  <span class="ansi-black-intense-fg">[ad6e5548] </span><span class="ansi-green-intense-fg">+ LibTracyClient_jll v0.9.1+6</span>
+  <span class="ansi-black-intense-fg">[e98f9f5b] </span><span class="ansi-green-intense-fg">+ NVTX_jll v3.2.2+0</span>
+  <span class="ansi-black-intense-fg">[1e29f10c] </span><span class="ansi-green-intense-fg">+ demumble_jll v1.3.0+0</span>
+  <span class="ansi-black-intense-fg">[0dad84c5] </span><span class="ansi-green-intense-fg">+ ArgTools v1.1.2</span>
+  <span class="ansi-black-intense-fg">[56f22d72] </span><span class="ansi-green-intense-fg">+ Artifacts v1.11.0</span>
+  <span class="ansi-black-intense-fg">[2a0f44e3] </span><span class="ansi-green-intense-fg">+ Base64 v1.11.0</span>
+  <span class="ansi-black-intense-fg">[ade2ca70] </span><span class="ansi-green-intense-fg">+ Dates v1.11.0</span>
+  <span class="ansi-black-intense-fg">[f43a241f] </span><span class="ansi-green-intense-fg">+ Downloads v1.6.0</span>
+  <span class="ansi-black-intense-fg">[7b1f6079] </span><span class="ansi-green-intense-fg">+ FileWatching v1.11.0</span>
+  <span class="ansi-black-intense-fg">[9fa8497b] </span><span class="ansi-green-intense-fg">+ Future v1.11.0</span>
+  <span class="ansi-black-intense-fg">[b77e0a4c] </span><span class="ansi-green-intense-fg">+ InteractiveUtils v1.11.0</span>
+  <span class="ansi-black-intense-fg">[4af54fe1] </span><span class="ansi-green-intense-fg">+ LazyArtifacts v1.11.0</span>
+  <span class="ansi-black-intense-fg">[b27032c2] </span><span class="ansi-green-intense-fg">+ LibCURL v0.6.4</span>
+  <span class="ansi-black-intense-fg">[76f85450] </span><span class="ansi-green-intense-fg">+ LibGit2 v1.11.0</span>
+  <span class="ansi-black-intense-fg">[8f399da3] </span><span class="ansi-green-intense-fg">+ Libdl v1.11.0</span>
+  <span class="ansi-black-intense-fg">[37e2e46d] </span><span class="ansi-green-intense-fg">+ LinearAlgebra v1.11.0</span>
+  <span class="ansi-black-intense-fg">[56ddb016] </span><span class="ansi-green-intense-fg">+ Logging v1.11.0</span>
+  <span class="ansi-black-intense-fg">[d6f4376e] </span><span class="ansi-green-intense-fg">+ Markdown v1.11.0</span>
+  <span class="ansi-black-intense-fg">[a63ad114] </span><span class="ansi-green-intense-fg">+ Mmap v1.11.0</span>
+  <span class="ansi-black-intense-fg">[ca575930] </span><span class="ansi-green-intense-fg">+ NetworkOptions v1.2.0</span>
+  <span class="ansi-black-intense-fg">[44cfe95a] </span><span class="ansi-green-intense-fg">+ Pkg v1.11.0</span>
+  <span class="ansi-black-intense-fg">[de0858da] </span><span class="ansi-green-intense-fg">+ Printf v1.11.0</span>
+  <span class="ansi-black-intense-fg">[9abbd945] </span><span class="ansi-green-intense-fg">+ Profile v1.11.0</span>
+  <span class="ansi-black-intense-fg">[9a3f8284] </span><span class="ansi-green-intense-fg">+ Random v1.11.0</span>
+  <span class="ansi-black-intense-fg">[ea8e919c] </span><span class="ansi-green-intense-fg">+ SHA v0.7.0</span>
+  <span class="ansi-black-intense-fg">[9e88b42a] </span><span class="ansi-green-intense-fg">+ Serialization v1.11.0</span>
+  <span class="ansi-black-intense-fg">[2f01184e] </span><span class="ansi-green-intense-fg">+ SparseArrays v1.11.0</span>
+  <span class="ansi-black-intense-fg">[fa267f1f] </span><span class="ansi-green-intense-fg">+ TOML v1.0.3</span>
+  <span class="ansi-black-intense-fg">[a4e569a6] </span><span class="ansi-green-intense-fg">+ Tar v1.10.0</span>
+  <span class="ansi-black-intense-fg">[cf7118a7] </span><span class="ansi-green-intense-fg">+ UUIDs v1.11.0</span>
+  <span class="ansi-black-intense-fg">[4ec0a83e] </span><span class="ansi-green-intense-fg">+ Unicode v1.11.0</span>
+  <span class="ansi-black-intense-fg">[e66e0078] </span><span class="ansi-green-intense-fg">+ CompilerSupportLibraries_jll v1.1.1+0</span>
+  <span class="ansi-black-intense-fg">[deac9b47] </span><span class="ansi-green-intense-fg">+ LibCURL_jll v8.6.0+0</span>
+  <span class="ansi-black-intense-fg">[e37daf67] </span><span class="ansi-green-intense-fg">+ LibGit2_jll v1.7.2+0</span>
+  <span class="ansi-black-intense-fg">[29816b5a] </span><span class="ansi-green-intense-fg">+ LibSSH2_jll v1.11.0+1</span>
+  <span class="ansi-black-intense-fg">[c8ffd9c3] </span><span class="ansi-green-intense-fg">+ MbedTLS_jll v2.28.6+0</span>
+  <span class="ansi-black-intense-fg">[14a3606d] </span><span class="ansi-green-intense-fg">+ MozillaCACerts_jll v2023.12.12</span>
+  <span class="ansi-black-intense-fg">[4536629a] </span><span class="ansi-green-intense-fg">+ OpenBLAS_jll v0.3.27+1</span>
+  <span class="ansi-black-intense-fg">[bea87d4a] </span><span class="ansi-green-intense-fg">+ SuiteSparse_jll v7.7.0+0</span>
+  <span class="ansi-black-intense-fg">[83775a58] </span><span class="ansi-green-intense-fg">+ Zlib_jll v1.2.13+1</span>
+  <span class="ansi-black-intense-fg">[8e850b90] </span><span class="ansi-green-intense-fg">+ libblastrampoline_jll v5.11.0+0</span>
+  <span class="ansi-black-intense-fg">[8e850ede] </span><span class="ansi-green-intense-fg">+ nghttp2_jll v1.59.0+0</span>
+  <span class="ansi-black-intense-fg">[3f19e933] </span><span class="ansi-green-intense-fg">+ p7zip_jll v17.4.0+2</span>
+<span class="ansi-cyan-intense-fg ansi-bold">        Info</span> Packages marked with <span class="ansi-yellow-fg">⌅</span> have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated -m`
+<span class="ansi-green-intense-fg ansi-bold">Precompiling</span> project...
+   1670.2 ms<span class="ansi-green-fg">  ✓ </span>BenchmarkTools
+  1 dependency successfully precompiled in 5 seconds. 107 already precompiled.
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">BenchmarkTools</span>
@@ -14069,6 +14226,14 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src='./Graphics/llvm_gpu.png' width='300px'></p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>CUDA.jl is the most mature and we will use it for the workshop.
 AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl and Metal.jl are functional but might contain bugs, miss some features and provide suboptimal performance.</p>
 
@@ -14086,7 +14251,7 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src='./Graphics/cpu_vs_gpu.png' width='700'></p>
+<p><img src='./Graphics/cpu_vs_gpu.png?raw=1' width='700'></p>
 
 </div>
 </div>
@@ -14094,7 +14259,7 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src='./Graphics/meme_gpu.jpg' width='300'></p>
+<p><img src='https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/meme_gpu.jpg?raw=1' width='300'></p>
 
 </div>
 </div>
@@ -14115,7 +14280,7 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./Graphics/gpu.png" width=500px></p>
+<p><img src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/gpu.png?raw=1" width=500px></p>
 
 </div>
 </div>
@@ -14123,7 +14288,7 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./Graphics/gpu_topology.svg" width=500px></p>
+<p><img src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/gpu_topology.svg?raw=1" width=500px></p>
 <ul>
 <li><strong>host</strong>: CPU + system memory (host memory)</li>
 <li><strong>device</strong>: GPU with its memory (device memory)</li>
@@ -14159,12 +14324,12 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14176,6 +14341,35 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4-element CuArray{Int64, 1, CUDA.DeviceMemory}:
+ 2
+ 3
+ 4
+ 5</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14207,12 +14401,12 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14225,11 +14419,40 @@ AMDGPU.jl is somewhat behind but still ready for general use, while oneAPI.jl an
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./Graphics/cpu_gpu_transfer.svg" width=180px></p>
+<p><img src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/cpu_gpu_transfer.svg?raw=1" width=180px></p>
 
 </div>
 </div>
@@ -14250,12 +14473,12 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14272,12 +14495,76 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>  1.986 s (3 allocations: 128.00 MiB)
+  2.879376 seconds (4.69 M CPU allocations: 241.683 MiB) (3 GPU allocations: 128.000 MiB, 0.01% memmgmt time)
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4096×4096 CuArray{Float64, 2, CUDA.DeviceMemory}:
+ 1026.99  1015.3   1025.14  1031.25  …  1016.87  1008.68  1034.22  1011.5
+ 1047.13  1026.29  1044.63  1049.7      1032.05  1042.32  1055.84  1039.99
+ 1040.51  1024.55  1037.85  1024.51     1035.03  1028.18  1048.08  1038.94
+ 1034.67  1013.85  1028.39  1032.16     1022.21  1033.61  1037.04  1036.53
+ 1044.02  1025.37  1028.57  1034.6      1015.15  1036.7   1052.18  1031.16
+ 1024.72  1017.55  1028.31  1032.17  …  1016.58  1021.62  1029.85  1027.92
+ 1028.99  1020.21  1020.69  1017.87     1019.39  1016.73  1023.25  1025.08
+ 1041.94  1024.67  1042.36  1037.09     1029.69  1027.95  1049.76  1041.12
+ 1032.85  1020.61  1031.86  1031.84     1029.17  1025.58  1038.33  1034.66
+ 1033.51  1004.56  1037.56  1013.91     1013.63  1021.88  1036.51  1017.24
+ 1028.97  1017.46  1033.71  1028.78  …  1019.38  1015.61  1034.45  1032.91
+ 1024.38  1006.09  1021.21  1020.32     1013.48  1016.88  1024.25  1023.06
+ 1054.25  1035.79  1047.1   1035.38     1050.19  1037.93  1061.02  1036.99
+    ⋮                                ⋱                                ⋮
+ 1048.25  1022.12  1033.04  1037.52     1030.92  1028.33  1047.46  1040.37
+ 1022.8   1010.92  1027.25  1020.61  …  1012.62  1026.87  1033.24  1026.06
+ 1037.05  1010.83  1012.94  1027.49     1020.68  1028.83  1030.81  1029.53
+ 1032.94  1000.12  1013.66  1005.56     1009.84  1017.09  1025.02  1019.89
+ 1018.27  1012.95  1016.49  1022.49     1017.54  1018.5   1026.17  1021.44
+ 1030.69  1022.34  1033.0   1027.41     1019.76  1023.69  1035.67  1025.44
+ 1047.15  1025.59  1036.47  1036.0   …  1027.26  1027.51  1044.79  1037.08
+ 1020.52  1012.35  1017.71  1005.59     1013.7   1014.61  1026.08  1024.57
+ 1037.24  1023.32  1038.6   1036.08     1024.73  1040.01  1044.69  1034.03
+ 1036.25  1023.28  1038.58  1025.03     1023.54  1029.25  1041.12  1030.8
+ 1022.35  1002.39  1019.13  1026.1      1014.03  1015.6   1027.43  1023.78
+ 1028.4   1011.89  1017.41  1019.07  …  1014.12  1012.42  1032.69  1016.87</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14291,6 +14578,70 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>  1.004 s (3 allocations: 64.00 MiB)
+  0.775521 seconds (902.11 k CPU allocations: 45.847 MiB) (3 GPU allocations: 64.000 MiB, 0.00% memmgmt time)
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4096×4096 CuArray{Float32, 2, CUDA.DeviceMemory}:
+  996.087   999.592   998.09   …   988.316  1007.7   1022.01  1007.2
+ 1006.53   1011.06   1023.48      1001.09   1040.52  1041.84  1031.08
+ 1017.01   1008.32   1018.55      1009.75   1027.09  1043.75  1022.13
+ 1019.15   1011.22   1024.76      1021.3    1037.39  1038.91  1025.44
+ 1014.54   1011.69   1031.85      1014.21   1036.06  1039.57  1025.65
+ 1013.87    992.487   999.248  …   999.858  1012.78  1028.95  1012.23
+ 1022.98   1018.57   1022.47      1018.9    1022.3   1039.56  1029.28
+ 1002.36    995.587  1007.21       989.008  1002.11  1011.41  1007.44
+ 1012.87   1011.56   1022.31      1007.16   1020.63  1028.17  1024.57
+ 1005.17    994.774  1005.77       986.332  1010.36  1018.36  1005.56
+ 1012.01   1003.77   1005.64   …  1005.09   1015.53  1041.75  1026.64
+ 1001.91   1006.91   1002.48      1005.54   1021.41  1025.02  1019.69
+  991.453   996.826  1000.81       992.184  1012.54  1023.66  1000.38
+    ⋮                          ⋱                                 ⋮
+ 1026.3    1013.76   1030.83      1016.2    1028.56  1048.64  1039.44
+ 1009.41   1007.21   1010.96   …  1006.72   1026.64  1020.0   1015.24
+ 1032.81   1015.73   1041.48      1027.76   1043.34  1054.64  1037.46
+  985.286   981.982   996.8        981.904  1014.65  1017.65  1015.52
+  999.356  1011.61   1029.92      1010.83   1033.89  1044.97  1023.28
+  996.383   993.485  1004.39       991.551  1006.39  1022.39  1003.27
+ 1015.57   1005.21   1022.99   …  1000.49   1018.27  1048.37  1023.94
+ 1032.75   1030.75   1047.02      1021.67   1040.09  1054.35  1038.37
+ 1023.27   1013.32   1021.0       1034.46   1032.59  1044.43  1048.68
+ 1013.1    1003.67   1016.27       999.768  1025.67  1027.68  1027.23
+ 1012.32    998.152  1015.76      1006.82   1014.65  1018.99  1014.48
+  999.108   997.12   1002.71   …   994.967  1015.06  1024.99  1009.59</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14309,12 +14660,12 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14327,6 +14678,51 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre><span class="ansi-yellow-intense-fg ansi-bold">┌ </span><span class="ansi-yellow-intense-fg ansi-bold">Warning: </span>Performing scalar indexing on task Task (runnable, started) @0x00007b682b5368b0.
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>Invocation of setindex! resulted in scalar indexing of a GPU array.
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>This is typically caused by calling an iterating implementation of a method.
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>Such implementations *do not* execute on the GPU, but very slowly on the CPU,
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>and therefore should be avoided.
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>If you want to allow scalar iteration, use `allowscalar` or `@allowscalar`
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>to enable scalar iteration globally or for the operations in question.
+<span class="ansi-yellow-intense-fg ansi-bold">└ </span><span class="ansi-black-intense-fg">@ GPUArraysCore ~/.julia/packages/GPUArraysCore/aNaXo/src/GPUArraysCore.jl:145</span>
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>3.0</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14335,12 +14731,12 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14354,6 +14750,45 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre><span class="ansi-yellow-intense-fg ansi-bold">┌ </span><span class="ansi-yellow-intense-fg ansi-bold">Warning: </span>It&#39;s not recommended to use allowscalar([true]) to allow scalar indexing.
+<span class="ansi-yellow-intense-fg ansi-bold">│ </span>Instead, use `allowscalar() do end` or `@allowscalar` to denote exactly which operations can use scalar operations.
+<span class="ansi-yellow-intense-fg ansi-bold">└ </span><span class="ansi-black-intense-fg">@ GPUArraysCore ~/.julia/packages/GPUArraysCore/aNaXo/src/GPUArraysCore.jl:184</span>
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>3.0</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14362,12 +14797,12 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14384,6 +14819,31 @@ We create two random arrays, one on the CPU and one on the GPU, and compare the 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>5.0f0</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14415,12 +14875,12 @@ These kernels are wrapped in CUDA.jl and can be used directly with CuArrays.</p>
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14431,6 +14891,59 @@ These kernels are wrapped in CUDA.jl and can be used directly with CuArrays.</p>
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CUDA toolchain: 
+- runtime 12.5, local installation
+- driver 550.54.15 for 13.0
+- compiler 12.9
+
+CUDA libraries: 
+- CUBLAS: 12.5.3
+- CURAND: 10.3.6
+- CUFFT: 11.2.3
+- CUSOLVER: 11.6.3
+- CUSPARSE: 12.5.1
+- CUPTI: 2024.2.1 (API 23.0.0)
+- NVML: 12.0.0+550.54.15
+
+Julia packages: 
+- CUDA: 5.8.3
+- CUDA_Driver_jll: 13.0.1+0
+- CUDA_Compiler_jll: 0.2.1+0
+- CUDA_Runtime_jll: 0.19.1+0
+- CUDA_Runtime_Discovery: 1.0.0
+
+Toolchain:
+- Julia: 1.11.5
+- LLVM: 16.0.6
+
+Preferences:
+- CUDA_Runtime_jll.version: 12.5.1
+- CUDA_Runtime_jll.local: true
+
+1 device:
+  0: Tesla T4 (sm_75, 14.283 GiB / 15.000 GiB available)
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14446,7 +14959,7 @@ These kernels are wrapped in CUDA.jl and can be used directly with CuArrays.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14471,12 +14984,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14489,12 +15002,63 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4096×4096 CuArray{Float32, 2, CUDA.DeviceMemory}:
+  4.0        -0.508248   -0.335083   -0.912087    …  -0.44785    -0.858303
+ -0.852563   -0.893101   -0.321687   -0.23571        -0.604702   -0.834698
+ -0.221156   -0.532528   -0.346107   -0.741136       -0.792318   -0.944039
+ -0.727079   -0.943091   -0.1827     -0.382383       -0.433809   -0.455255
+ -0.88376    -0.353073   -0.78484    -0.403264       -0.645132   -0.550728
+ -0.538295   -0.692474   -0.48064    -0.435903    …  -0.345621   -0.331552
+ -0.0550714  -0.517408   -0.440841   -0.648895       -0.0305568  -0.957892
+ -0.983735   -0.460856   -0.125004   -0.411053       -0.121264   -0.412667
+ -0.766548   -0.546135   -0.762496   -0.181115       -0.0594926  -0.567672
+ -0.461056   -0.312635   -0.778755   -0.434568       -0.802518   -0.861647
+ -0.10338    -0.363496   -0.360205   -0.64806     …  -0.0638976  -0.0796155
+ -0.520788   -0.152382   -0.205976   -0.00538105     -0.597848   -0.860872
+ -0.842006   -0.692116   -0.208375   -0.960882       -0.804358   -0.678759
+  ⋮                                               ⋱               ⋮
+ -0.65491    -0.704563   -0.0845885  -0.425887       -0.492628   -0.0321724
+ -0.894439   -0.860415   -0.497047   -0.671449    …  -0.242503   -0.61756
+ -0.163299   -0.393274   -0.766965   -0.905035       -0.444256   -0.688983
+ -0.350692   -0.542414   -0.21832    -0.407239       -0.773985   -0.638566
+ -0.992595   -0.0414522  -0.0279455  -0.560533       -0.0708157  -0.152831
+ -0.633082   -0.166251   -0.0560219  -0.823308       -0.787209   -0.854479
+ -0.157565   -0.0978622  -0.466069   -0.699144    …  -0.188686   -0.347094
+ -0.506086   -0.198416   -0.86436    -0.193543       -0.477835   -0.975993
+ -0.27227    -0.965918   -0.142858   -0.169053       -0.802855   -0.578236
+ -0.365218   -0.38562    -0.836447   -0.181083       -0.0197552  -0.255683
+ -0.0719256  -0.0955292  -0.229782   -0.213401       -0.291916   -0.399657
+ -0.539788   -0.258021   -0.432582   -0.290143    …  -0.162144   -0.000256121</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14507,12 +15071,63 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4096×4096 CuArray{Float32, 2, CUDA.DeviceMemory}:
+ 6.0      1.49175  1.66492  1.08791  …  1.6675   1.72558  1.55215  1.1417
+ 1.14744  1.1069   1.67831  1.76429     1.02618  1.21002  1.3953   1.1653
+ 1.77884  1.46747  1.65389  1.25886     1.72794  1.0586   1.20768  1.05596
+ 1.27292  1.05691  1.8173   1.61762     1.42323  1.43254  1.56619  1.54474
+ 1.11624  1.64693  1.21516  1.59674     1.35074  1.20594  1.35487  1.44927
+ 1.46171  1.30753  1.51936  1.5641   …  1.1884   1.91192  1.65438  1.66845
+ 1.94493  1.48259  1.55916  1.35111     1.00937  1.89166  1.96944  1.04211
+ 1.01626  1.53914  1.875    1.58895     1.28885  1.62338  1.87874  1.58733
+ 1.23345  1.45386  1.2375   1.81889     1.36867  1.73993  1.94051  1.43233
+ 1.53894  1.68737  1.22124  1.56543     1.94618  1.99532  1.19748  1.13835
+ 1.89662  1.6365   1.63979  1.35194  …  1.52033  1.96453  1.9361   1.92038
+ 1.47921  1.84762  1.79402  1.99462     1.26965  1.07163  1.40215  1.13913
+ 1.15799  1.30788  1.79162  1.03912     1.29896  1.84451  1.19564  1.32124
+ ⋮                                   ⋱                             ⋮
+ 1.34509  1.29544  1.91541  1.57411     1.60543  1.9198   1.50737  1.96783
+ 1.10556  1.13958  1.50295  1.32855  …  1.07247  1.79371  1.7575   1.38244
+ 1.8367   1.60673  1.23303  1.09497     1.36739  1.58472  1.55574  1.31102
+ 1.64931  1.45759  1.78168  1.59276     1.301    1.61917  1.22601  1.36143
+ 1.00741  1.95855  1.97205  1.43947     1.35892  1.32137  1.92918  1.84717
+ 1.36692  1.83375  1.94398  1.17669     1.72621  1.52623  1.21279  1.14552
+ 1.84244  1.90214  1.53393  1.30086  …  1.10588  1.56906  1.81131  1.65291
+ 1.49391  1.80158  1.13564  1.80646     1.03786  1.92948  1.52216  1.02401
+ 1.72773  1.03408  1.85714  1.83095     1.21091  1.67183  1.19715  1.42176
+ 1.63478  1.61438  1.16355  1.81892     1.66511  1.14718  1.98024  1.74432
+ 1.92807  1.90447  1.77022  1.7866      1.08127  1.49276  1.70808  1.60034
+ 1.46021  1.74198  1.56742  1.70986  …  1.37959  1.08022  1.83786  1.99974</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14525,12 +15140,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>8.386694f6</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14543,6 +15183,57 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>4096×4096 CuArray{Float32, 2, CUDA.DeviceMemory}:
+    5.0      2027.4   4040.62  6077.33  …  8.38053f6  8.38258f6  8.38465f6
+    5.14744  2027.51  4041.29  6078.09     8.38053f6  8.38258f6  8.38465f6
+    5.92628  2027.97  4041.95  6078.35     8.38053f6  8.38258f6  8.38465f6
+    6.1992   2028.03  4042.76  6078.97     8.38053f6  8.38258f6  8.38465f6
+    6.31544  2028.68  4042.98  6079.57     8.38053f6  8.38258f6  8.38465f6
+    6.77715  2028.99  4043.5   6080.13  …  8.38053f6  8.38258f6  8.38465f6
+    7.72208  2029.47  4044.06  6080.48     8.38053f6  8.38258f6  8.38465f6
+    7.73834  2030.01  4044.93  6081.07     8.38053f6  8.38258f6  8.38465f6
+    7.97179  2030.46  4045.17  6081.89     8.38053f6  8.38258f6  8.38465f6
+    8.51074  2031.15  4045.39  6082.46     8.38054f6  8.38258f6  8.38465f6
+    9.40736  2031.79  4046.03  6082.81  …  8.38054f6  8.38258f6  8.38465f6
+    9.88657  2032.63  4046.83  6083.8      8.38054f6  8.38258f6  8.38465f6
+   10.0446   2032.94  4047.62  6083.84     8.38054f6  8.38258f6  8.38465f6
+    ⋮                                   ⋱                        ⋮
+ 2020.86     4032.96  6070.78  8116.21     8.38257f6  8.38464f6  8.38669f6
+ 2020.96     4033.09  6071.28  8116.54  …  8.38257f6  8.38464f6  8.38669f6
+ 2021.8      4033.7   6071.52  8116.64     8.38257f6  8.38464f6  8.38669f6
+ 2022.45     4034.16  6072.3   8117.23     8.38257f6  8.38464f6  8.38669f6
+ 2022.45     4035.12  6073.27  8117.67     8.38257f6  8.38464f6  8.38669f6
+ 2022.82     4035.95  6074.21  8117.84     8.38257f6  8.38464f6  8.38669f6
+ 2023.66     4036.85  6074.75  8118.15  …  8.38257f6  8.38464f6  8.38669f6
+ 2024.16     4037.66  6074.88  8118.95     8.38258f6  8.38464f6  8.38669f6
+ 2024.89     4037.69  6075.74  8119.78     8.38258f6  8.38464f6  8.38669f6
+ 2025.52     4038.3   6075.9   8120.6      8.38258f6  8.38464f6  8.38669f6
+ 2026.45     4039.21  6076.67  8121.39     8.38258f6  8.38464f6  8.38669f6
+ 2026.91     4039.95  6077.24  8122.1   …  8.38258f6  8.38465f6  8.38669f6</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14551,12 +15242,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">function</span> <span class="n">vadd!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
@@ -14572,12 +15263,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>vadd! (generic function with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -14592,12 +15308,47 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>10-element Vector{Float64}:
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14614,6 +15365,41 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>10-element CuArray{Float64, 1, CUDA.DeviceMemory}:
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0
+ 2.0</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14650,12 +15436,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">function</span> <span class="n">vadd2!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
@@ -14670,12 +15456,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>vadd2! (generic function with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14694,12 +15505,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>CUDA.HostKernel for vadd2!(CuDeviceVector{Float32, 1}, CuDeviceVector{Float32, 1}, CuDeviceVector{Float32, 1})</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14710,6 +15546,31 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>true</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14741,7 +15602,7 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./Graphics/gpu_threads_block.png" alt="gpu_threads_block"></p>
+<p><img src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/gpu_threads_block.png?raw=1" alt="gpu_threads_block"></p>
 
 </div>
 </div>
@@ -14767,12 +15628,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">function</span> <span class="n">vadd3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
@@ -14789,12 +15650,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>vadd3! (generic function with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14807,6 +15693,31 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>1024</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14815,12 +15726,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14839,12 +15750,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>16</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">if</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
@@ -14857,12 +15793,37 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>CUDA.HostKernel for vadd3!(CuDeviceVector{Float32, 1}, CuDeviceVector{Float32, 1}, CuDeviceVector{Float32, 1})</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="n">all</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="o">.==</span> <span class="mf">5.0</span><span class="p">)</span>
@@ -14871,6 +15832,31 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>true</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14895,7 +15881,7 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="c"># compile kernel</span>
@@ -14934,12 +15920,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">function</span> <span class="n">gpu_add_print!</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -14965,6 +15951,38 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>thread 1, block 10
+thread 2, block 10
+thread 3, block 10
+thread 4, block 10
+thread 5, block 10
+thread 6, block 10
+thread 7, block 10
+thread 8, block 10
+thread 9, block 10
+thread 10, block 10
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14988,12 +16006,12 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">function</span> <span class="n">sqrt_sum</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -15011,17 +16029,40 @@ The simple element-wise addition we saw above, <code>a .+= 1</code>, is an examp
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>sqrt_sum (generic function with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="References:">References:<a class="anchor-link" href="#References:">&#182;</a></h1><ul>
-<li><a href="https://enccs.github.io/Julia-for-HPC/GPU/">https://enccs.github.io/Julia-for-HPC/GPU/</a></li>
 <li><a href="https://cuda.juliagpu.org/stable/">https://cuda.juliagpu.org/stable/</a></li>
 <li><a href="https://www.youtube.com/watch?v=Fz-ogmASMAE">https://www.youtube.com/watch?v=Fz-ogmASMAE</a></li>
 <li><a href="https://www.cherryservers.com/blog/gpu-vs-cpu-what-are-the-key-differences">https://www.cherryservers.com/blog/gpu-vs-cpu-what-are-the-key-differences</a></li>
 <li><a href="https://developer.nvidia.com/blog/tag/cuda-refresher/">https://developer.nvidia.com/blog/tag/cuda-refresher/</a></li>
-<li><a href="https://i.redd.it/yr9h5cpyzpn21.jpg">https://i.redd.it/yr9h5cpyzpn21.jpg</a></li>
 <li><a href="https://docs.nvidia.com/cuda/">https://docs.nvidia.com/cuda/</a></li>
 <li><a href="https://www.youtube.com/watch?v=Hz9IMJuW5hU">https://www.youtube.com/watch?v=Hz9IMJuW5hU</a></li>
 <li><a href="https://julialang.org/learning/">https://julialang.org/learning/</a></li>
