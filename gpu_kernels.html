@@ -7542,7 +7542,7 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Pkg</span>
 <span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">"colab6"</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="s">"CUDA"</span><span class="p">,</span><span class="w"> </span><span class="s">"KernelAbstractions"</span><span class="p">,</span><span class="w"> </span><span class="s">"Adapt"</span><span class="p">,</span><span class="w"> </span><span class="s">"NVTX"</span><span class="p">,</span><span class="w"> </span><span class="s">"ImageShow"</span><span class="p">])</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="s">"CUDA"</span><span class="p">,</span><span class="w"> </span><span class="s">"KernelAbstractions"</span><span class="p">,</span><span class="w"> </span><span class="s">"Adapt"</span><span class="p">,</span><span class="w"> </span><span class="s">"NVTX"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -7599,8 +7599,8 @@ a.anchor-link {
 <span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
 <span class="n">X_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
 <span class="n">Y_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
-<span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuVector</span><span class="p">(</span><span class="n">X_gpu</span><span class="p">)</span>
-<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuVector</span><span class="p">(</span><span class="n">Y_gpu</span><span class="p">)</span>
+<span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuVector</span><span class="p">(</span><span class="n">X_cpu</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuVector</span><span class="p">(</span><span class="n">Y_cpu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7634,6 +7634,7 @@ a.anchor-link {
 <span class="k">end</span>
 
 <span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="o">=</span><span class="mi">32</span><span class="w"> </span><span class="n">blocks</span><span class="o">=</span><span class="n">cld</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">),</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="n">saxpy!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span>
+<span class="n">Y</span>
 </pre></div>
 </div>
 </div>
@@ -7661,12 +7662,13 @@ a.anchor-link {
 <div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">KernelAbstractions</span>
 <span class="k">using</span><span class="w"> </span><span class="n">CUDA</span>
 
-<span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">saxpy!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nd">@Const</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span>
+<span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">kernel_saxpy!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nd">@Const</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span>
 <span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@index</span><span class="p">(</span><span class="n">Global</span><span class="p">)</span>
 <span class="w">    </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">Y</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Y</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
 <span class="k">end</span>
 
-<span class="n">saxpy!</span><span class="p">(</span><span class="n">CUDABackend</span><span class="p">())(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">kernel_saxpy!</span><span class="p">(</span><span class="n">CUDABackend</span><span class="p">())(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">Y</span>
 </pre></div>
 </div>
 </div>
@@ -7715,24 +7717,24 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<img alt="No description has been provided for this image" src="./Graphics/KA1.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA2.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA3.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA4.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA5.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA6.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA7.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA8.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA9.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA10.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA11.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA12.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA13.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA14.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA15.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA16.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA17.png" width="1000px"/>
-<img alt="No description has been provided for this image" src="./Graphics/KA18.png" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA1.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA2.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA3.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA4.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA5.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA6.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA7.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA8.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA9.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA10.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA11.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA12.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA13.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA14.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA15.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA16.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA17.png?raw=1" width="1000px"/>
+<img alt="No description has been provided for this image" src="https://github.com/amontoison/Workshop-GERAD/blob/main/Graphics/KA18.png?raw=1" width="1000px"/>
 </div>
 </div>
 </div>
@@ -7787,18 +7789,29 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">KernelAbstractions</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">KA</span>
 
-<span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">vadd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">vadd_kernel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
 <span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@index</span><span class="p">(</span><span class="n">Global</span><span class="p">)</span>
 <span class="w">    </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 <span class="k">end</span>
-
-<span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDABackend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDABackend</span><span class="p">()</span>
 <span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KA</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="kt">Float32</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
 <span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KA</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="kt">Float32</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
 <span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
-<span class="n">vadd_kernel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vadd</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-<span class="n">vadd_kernel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">size</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="n">vadd_kernel</span><span class="p">(</span><span class="n">backend</span><span class="p">)(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">size</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -7912,12 +7925,12 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">nreps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
-<span class="k">const</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span>
-<span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float32</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">nreps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span>
+<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float32</span>
 
-<span class="k">const</span><span class="w"> </span><span class="n">TILE_DIM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span>
-<span class="k">const</span><span class="w"> </span><span class="n">BLOCK_ROWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
+<span class="n">TILE_DIM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span>
+<span class="n">BLOCK_ROWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
 </pre></div>
 </div>
 </div>
@@ -8296,132 +8309,6 @@ a.anchor-link {
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Atomic-operations">Atomic operations<a class="anchor-link" href="#Atomic-operations">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">racy_kernel!</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<span class="w">	</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@index</span><span class="p">(</span><span class="n">Global</span><span class="p">,</span><span class="w"> </span><span class="kt">NTuple</span><span class="p">)</span>
-<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<span class="w">		</span><span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
-<span class="w">	</span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">ImageShow</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float32</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">));</span>
-<span class="n">img</span><span class="p">[</span><span class="mi">10</span><span class="o">:</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">:</span><span class="mi">20</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="n">img</span><span class="p">[</span><span class="mi">35</span><span class="o">:</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="n">simshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KernelAbstractions</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="kt">Float32</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">img</span><span class="p">));</span>
-<span class="n">racy_kernel!</span><span class="p">(</span><span class="n">backend</span><span class="p">)(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">),</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">size</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
-<span class="n">simshow</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Atomix</span><span class="o">:</span><span class="w"> </span><span class="nd">@atomic</span><span class="p">,</span><span class="w"> </span><span class="nd">@atomicswap</span><span class="p">,</span><span class="w"> </span><span class="nd">@atomicreplace</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@kernel</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">nonracy_kernel!</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
-<span class="w">	</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@index</span><span class="p">(</span><span class="n">Global</span><span class="p">,</span><span class="w"> </span><span class="kt">NTuple</span><span class="p">)</span>
-<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<span class="w">		</span><span class="nd">@atomic</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
-<span class="w">	</span><span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KernelAbstractions</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="kt">Float32</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">img</span><span class="p">));</span>
-<span class="n">nonracy_kernel!</span><span class="p">(</span><span class="n">backend</span><span class="p">)(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">),</span><span class="w"> </span><span class="n">ndrange</span><span class="o">=</span><span class="n">size</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
-<span class="n">simshow</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
